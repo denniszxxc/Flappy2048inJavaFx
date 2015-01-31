@@ -5,6 +5,9 @@
  */
 package fappy2048injavafx;
 
+import controller.GameEngine;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,33 +15,37 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  *
  * @author dennisli
  */
 public class Fappy2048InJavaFx extends Application {
-    
+
+    private GameEngine gameEngine;
+
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+        gameEngine = new GameEngine();
+        Scene scene  = new Scene(gameEngine.getPane(), 800, 600);
+        
+        // Create a handler for refreshing
+        EventHandler<ActionEvent> eventHandler = e -> {
+            gameEngine.update(System.nanoTime());
+            scene.setRoot(gameEngine.getPane());
             
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
+            primaryStage.setTitle("Flappy2048 in JavaFx!");
+            primaryStage.setScene(scene);
+            primaryStage.show();    
+        };
         
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        Timeline animation = new Timeline(
+                new KeyFrame(Duration.millis(gameEngine.REFRESH_INTERVAL), eventHandler));
+        animation.setCycleCount(Timeline.INDEFINITE);
+        animation.play();
+
+
     }
 
     /**
