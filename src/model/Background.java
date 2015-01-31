@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
  * Background objects' information
  * @author dennisli
  */
-public class Background {
+public class Background extends GraphicalObjs{
     private Image cloud;
     private Image sky;
 
@@ -41,5 +41,10 @@ public class Background {
      */
     public void setSky(Image sky) {
         this.sky = sky;
+    }
+
+    @Override
+    public void update(long updateInterval) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

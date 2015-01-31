@@ -29,14 +29,14 @@ public class Fappy2048InJavaFx extends Application {
     public void start(Stage primaryStage) {
         gameEngine = new GameEngine();
         Scene scene  = new Scene(gameEngine.getPane(), 800, 600);
+        primaryStage.setTitle("Flappy2048 in JavaFx!");
+        primaryStage.setScene(scene);
         
         // Create a handler for refreshing
         EventHandler<ActionEvent> eventHandler = e -> {
             gameEngine.update(System.nanoTime());
             scene.setRoot(gameEngine.getPane());
             
-            primaryStage.setTitle("Flappy2048 in JavaFx!");
-            primaryStage.setScene(scene);
             primaryStage.show();    
         };
         

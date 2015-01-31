@@ -9,7 +9,7 @@ package model;
  * Pillar in Game is formed by a stack of boxes
  * @author dennisli
  */
-class Pillar {
+class Pillar extends GraphicalObjs{
     private Box[] boxes;
     
     /**
@@ -25,6 +25,11 @@ class Pillar {
      */
     Pillar(int birdValue){
         
+    }
+
+    @Override
+    public void update(long updateInterval) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

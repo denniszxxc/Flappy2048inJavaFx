@@ -5,10 +5,9 @@
  */
 package controller;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import model.GraphicalObjCollector;
 import view.GameBoard;
 
 /**
@@ -16,19 +15,24 @@ import view.GameBoard;
  * @author dennisli
  */
 public class GameEngine {
+    public enum GameStatus{
+        GAMESTART, GAMEPLAY, GAMEEND
+    };
+    
+    public final int REFRESH_INTERVAL = 35;
     private long lastUpdateTime;
     private long currentUpdateTime;
-    public final int REFRESH_INTERVAL = 35;
     
     private GameBoard gameboard;
     private Pane pane;
     private StartHandler startHandler;
     
+    private GameStatus gameStatus;
     
     public GameEngine(){
         gameboard = new GameBoard();
         lastUpdateTime = 0;
-              
+        gameStatus = GameStatus.GAMESTART;
         startHandler = new StartHandler(this);
         
         pane = gameboard.startScreen(startHandler);
@@ -76,7 +80,12 @@ public class GameEngine {
     }
    
     public void startGame(){
-        pane = gameboard.draw();
+        pane = new StackPane();
+        gameStatus = GameStatus.GAMEPLAY;
+        
+        pane.setOnKeyTyped(e->{
+            gameboard.getGraphicalObjCollector().getBird().jump();
+        });
     }
     
     /** 
@@ -88,7 +97,12 @@ public class GameEngine {
         lastUpdateTime = currentUpdateTime;
         currentUpdateTime = newUpdateTime;
         
-        //pane = gameboard.draw();
+        gameboard.getGraphicalObjCollector().updateAll(lastUpdateTime - currentUpdateTime);
+        
+        
+        if(gameStatus == GameStatus.GAMEPLAY){
+            pane = gameboard.drawGamePlay(pane);
+        }
 
     }
        

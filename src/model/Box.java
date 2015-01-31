@@ -9,7 +9,7 @@ package model;
  * 
  * @author dennisli
  */
-class Box {
+class Box extends GraphicalObjs{
     /**
      * the Value on a box
      */
@@ -54,5 +54,10 @@ class Box {
      */
     public void setFontSize(int fontSize) {
         this.fontSize = fontSize;
+    }
+
+    @Override
+    public void update(long updateInterval) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

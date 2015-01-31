@@ -21,7 +21,7 @@ public abstract class GraphicalObjs {
      * update object properties based on time
      * @param updateInterval the time used to update object properties
      */
-    public abstract void update(double updateInterval);
+    public abstract void update(long updateInterval);
 
     /**
      * @return the x

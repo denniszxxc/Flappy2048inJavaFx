@@ -7,7 +7,6 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -21,8 +20,19 @@ public class GameBoard {
     private Pane pane;    
     private GraphicalObjCollector graphicalObjCollector;
     
+    public GameBoard(){
+        graphicalObjCollector = new GraphicalObjCollector();
+    }
+    
+    public GraphicalObjCollector getGraphicalObjCollector(){
+        return graphicalObjCollector;
+    }
+    
+    
     /** 
      * Display the start screen
+     * 
+     * @parm startHandler Handler for Start Button
      */
     public Pane startScreen(EventHandler<ActionEvent> startHandler ){
         Button btn = new Button();
@@ -37,6 +47,8 @@ public class GameBoard {
     
     /** 
      * Display the end screen
+     * 
+     * @return root pane with graphic elements
      */
     public Pane endScreen(){
         Button btn = new Button();
@@ -45,7 +57,7 @@ public class GameBoard {
             
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("DO Sth");
+                System.out.println("DO Sth in endScreen");
             }
         });
         
@@ -57,8 +69,12 @@ public class GameBoard {
     
     /**
      * Draw the graphical objects on screen 
+     * 
+     * @return root
      */
-    public Pane draw(){
+    public Pane drawGamePlay(Pane root){
+        graphicalObjCollector = new GraphicalObjCollector();
+        
         Button btn = new Button();
         double x = Math.random();
         btn.setText(Double.toString(x));
@@ -72,8 +88,8 @@ public class GameBoard {
             }
         });
         
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
+       root.getChildren().clear();
+       root.getChildren().add(btn);
         
         return root;
     }

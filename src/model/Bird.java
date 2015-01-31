@@ -10,7 +10,7 @@ package model;
  * 
  * @author dennisli
  */
-public class Bird {
+public class Bird extends GraphicalObjs{
     /**
      * The value of the bird, eg. 2,4,8...
      */
@@ -53,7 +53,8 @@ public class Bird {
      * Start the bird's jump movement 
      */
     public void jump(){
-        
+        jumping = true;
+        System.out.println("Jump!");
     }
     
     /**
@@ -68,6 +69,11 @@ public class Bird {
      */
     public void enterBoxGap(){
         
+    }
+
+    @Override
+    public void update(long updateInterval) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
