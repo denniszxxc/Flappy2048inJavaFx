@@ -13,13 +13,15 @@ import java.util.concurrent.TimeUnit;
  * @author dennisli
  */
 public class Bird extends GraphicalObjs{
-    private static int BIRD_INIT_X = 80;
-    private static int BIRD_INIT_Y = 200;
+    public static double BIRD_WiDTH = 100;
+    public static double BIRD_HEIGHT = 100;
+    private static double BIRD_INIT_X = 80;
+    private static double BIRD_INIT_Y = 200;
     private static double BIRD_INIT_VELOCITY_X = 0;
     private static double BIRD_INIT_VELOCITY_Y = 0;
-    private static double BIRD_GRAVITY = 0.05;
-    private static double BIRD_JUMP_SPEED = 5.0;
-    
+    private static double BIRD_GRAVITY = 0.0000888;
+    private static double BIRD_JUMP_SPEED = -0.1;
+   
     /**
      * The value of the bird, eg. 2,4,8...
      */
@@ -89,18 +91,22 @@ public class Bird extends GraphicalObjs{
     }
 
     @Override
-    public void update(long updateInterval) {
+    public synchronized void update(long updateInterval) {
         if(jumping){
             super.setVelocityY(BIRD_JUMP_SPEED);
             jumping = false;
         }
         long durationInMs = TimeUnit.NANOSECONDS.toMillis(updateInterval);
 
-        super.setVelocityY(super.getVelocityY() - BIRD_GRAVITY);
+        super.setVelocityY(super.getVelocityY() + BIRD_GRAVITY * durationInMs);
            
-        super.setY( getY() + (int) Math.round(getVelocityY()* durationInMs));
+        super.setY( getY() + getVelocityY() * durationInMs);
         
         System.out.println(getY());
+        
+        if(getY()>800 - BIRD_HEIGHT){
+            System.out.println("Bottom");
+        }
     }
     
 }

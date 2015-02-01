@@ -5,11 +5,18 @@
  */
 package view;
 
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.StrokeLineJoin;
+import model.Bird;
 import model.GraphicalObjCollector;
 
 /**
@@ -72,26 +79,34 @@ public class GameBoard {
      * 
      * @return root
      */
-    public Pane drawGamePlay(Pane root){
-        graphicalObjCollector = new GraphicalObjCollector();
+    public Pane drawGamePlay(Pane root , EventHandler jumpHandler){
+              
+        Canvas canvas = new Canvas(800, 600);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        canvas.setOnKeyPressed(jumpHandler);
+        canvas.setOnMouseClicked(jumpHandler);
         
-        Button btn = new Button();
-        double x = Math.random();
-        btn.setText(Double.toString(x));
+        drawBird(gc);
         
-        
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("do sth");
-            }
-        });
-        
-       root.getChildren().clear();
-       root.getChildren().add(btn);
-        
+        root.getChildren().clear();
+        root.getChildren().add(canvas);
+
+        // root.getChildren().clear();
+        // root.getChildren().add(btn);
+
         return root;
     }
     
+    public void drawBird(GraphicsContext gc) {
+        double xPoisition = graphicalObjCollector.getBird().getX();
+        double yPoisition = graphicalObjCollector.getBird().getY();
+        
+        gc.setFill(Color.BURLYWOOD);
+        gc.setStroke(Color.GRAY);
+        gc.setLineWidth(5);
+        gc.setLineJoin(StrokeLineJoin.ROUND);
+        
+        gc.fillRect(xPoisition, yPoisition, Bird.BIRD_WiDTH , Bird.BIRD_HEIGHT);
+        gc.strokeRect(xPoisition, yPoisition, Bird.BIRD_WiDTH , Bird.BIRD_HEIGHT);
+    }
 }

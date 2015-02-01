@@ -12,8 +12,8 @@ package model;
  * @author dennisli
  */
 public abstract class GraphicalObjs {
-    private int x;
-    private int y;
+    private double x;
+    private double y;
     private double velocityX;
     private double velocityY;
     
@@ -26,28 +26,28 @@ public abstract class GraphicalObjs {
     /**
      * @return the x
      */
-    public int getX() {
+    public double getX() {
         return x;
     }
 
     /**
      * @param x the x to set
      */
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
     /**
      * @return the y
      */
-    public int getY() {
+    public double getY() {
         return y;
     }
 
     /**
      * @param y the y to set
      */
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 

@@ -6,6 +6,8 @@
 package fappy2048injavafx;
 
 import controller.GameEngine;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -21,18 +23,20 @@ import javafx.util.Duration;
  *
  * @author dennisli
  */
-public class Fappy2048InJavaFx extends Application {
+public class Fappy2048InJavaFx extends Application  {
 
     private GameEngine gameEngine;
-
+    private Scene scene;
+    private Stage primaryStage;
+    
     @Override
     public void start(Stage primaryStage) {
         gameEngine = new GameEngine();
         Scene scene  = new Scene(gameEngine.getPane(), 800, 600);
         primaryStage.setTitle("Flappy2048 in JavaFx!");
         primaryStage.setScene(scene);
-        
-        // Create a handler for refreshing
+          
+    // Create a handler for refreshing
         EventHandler<ActionEvent> eventHandler = e -> {
             gameEngine.update(System.nanoTime());
             scene.setRoot(gameEngine.getPane());
@@ -45,7 +49,6 @@ public class Fappy2048InJavaFx extends Application {
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play();
 
-
     }
 
     /**
@@ -54,5 +57,5 @@ public class Fappy2048InJavaFx extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

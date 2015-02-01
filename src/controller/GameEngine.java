@@ -25,6 +25,7 @@ public class GameEngine {
     private GameBoard gameboard;
     private Pane pane;
     private StartHandler startHandler;
+    private JumpHandler jumpHandler;
     
     private GameStatus gameStatus;
     
@@ -33,6 +34,7 @@ public class GameEngine {
         lastUpdateTime = 0;
         gameStatus = GameStatus.GAMESTART;
         startHandler = new StartHandler(this);
+        jumpHandler = new JumpHandler(this);
         
         pane = gameboard.startScreen(startHandler);
     }
@@ -82,13 +84,6 @@ public class GameEngine {
         pane = new StackPane();
         gameStatus = GameStatus.GAMEPLAY;
         
-        // Jump handler
-        pane.setOnKeyTyped(e->{
-            gameboard.getGraphicalObjCollector().getBird().jump();
-        });
-        pane.setOnKeyTyped(e->{
-            gameboard.getGraphicalObjCollector().getBird().jump();
-        });
     }
     
     /** 
@@ -100,11 +95,12 @@ public class GameEngine {
         lastUpdateTime = currentUpdateTime;
         currentUpdateTime = newUpdateTime;
         
-        gameboard.getGraphicalObjCollector().updateAll(currentUpdateTime - lastUpdateTime);
         
         
-        if(gameStatus == GameStatus.GAMEPLAY){
-            pane = gameboard.drawGamePlay(pane);
+        if(gameStatus == GameStatus.GAMEPLAY){           
+            gameboard.getGraphicalObjCollector().updateAll(currentUpdateTime - lastUpdateTime);
+            pane = gameboard.drawGamePlay(pane , jumpHandler);
+            
         } 
 
     }
