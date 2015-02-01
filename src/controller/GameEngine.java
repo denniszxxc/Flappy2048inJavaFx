@@ -5,8 +5,8 @@
  */
 package controller;
 
+import java.util.concurrent.TimeUnit;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import view.GameBoard;
 
 /**
@@ -18,7 +18,7 @@ public class GameEngine {
         GAMESTART, GAMEPLAY, GAMEEND
     };
     
-    public final int REFRESH_INTERVAL = 35;
+    public final int REFRESH_INTERVAL = 30;
     private long lastUpdateTime;
     private long currentUpdateTime;
     
@@ -81,7 +81,7 @@ public class GameEngine {
     }
    
     public void startGame(){
-        pane = new StackPane();
+        pane = gameboard.initGamePlay(jumpHandler);
         gameStatus = GameStatus.GAMEPLAY;
         
     }
@@ -94,12 +94,13 @@ public class GameEngine {
     public void update(long newUpdateTime){
         lastUpdateTime = currentUpdateTime;
         currentUpdateTime = newUpdateTime;
-        
+        long durationInMs = TimeUnit.NANOSECONDS.toMillis(currentUpdateTime - lastUpdateTime);
+
         
         
         if(gameStatus == GameStatus.GAMEPLAY){           
-            gameboard.getGraphicalObjCollector().updateAll(currentUpdateTime - lastUpdateTime);
-            pane = gameboard.drawGamePlay(pane , jumpHandler);
+            gameboard.getGraphicalObjCollector().updateAll(durationInMs);
+            pane = gameboard.drawGamePlay(pane );
             
         } 
 

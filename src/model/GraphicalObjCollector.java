@@ -16,12 +16,12 @@ public class GraphicalObjCollector {
 
     private Bird bird;
     private Background background;
-    private PillarCollector pillars;
+    private PillarCollector pillarCollector;
     
     public GraphicalObjCollector(){
         bird = new Bird();
         background = new Background();
-        pillars = new PillarCollector();
+        pillarCollector = new PillarCollector();
     }
     
     /**
@@ -53,17 +53,17 @@ public class GraphicalObjCollector {
     }
 
     /**
-     * @return the pillars
+     * @return the pillarCollector
      */
-    public PillarCollector getPillars() {
-        return pillars;
+    public PillarCollector getPillarCollector() {
+        return pillarCollector;
     }
 
     /**
-     * @param pillars the pillars to set
+     * @param pillarCollector the pillarCollector to set
      */
-    public void setPillars(PillarCollector pillars) {
-        this.pillars = pillars;
+    public void setPillarCollector(PillarCollector pillarCollector) {
+        this.pillarCollector = pillarCollector;
     }
 
     /**
@@ -74,7 +74,7 @@ public class GraphicalObjCollector {
     public void updateAll(long updateInterval) {
         getBird().update(updateInterval);
         // getBackground().update(updateInterval);
-        // getPillars().update(updateInterval);
+        getPillarCollector().update(updateInterval);
     }
 
 }

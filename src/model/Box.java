@@ -5,30 +5,32 @@
  */
 package model;
 
+import java.util.concurrent.TimeUnit;
+
 /**
- * 
+ *
  * @author dennisli
  */
-class Box extends GraphicalObjs{
+public class Box extends GraphicalObjs {
+    public static final int BOX_DIMENTION = 100;
     /**
      * the Value on a box
      */
-   private int boxValue;
-   /**
-    * the font size of text on box
-    */
-   private int fontSize;
+    private int boxValue;
+    /**
+     * the font size of text on box
+     */
+    private int fontSize;
 
-   
-   Box(){
-       
-   } 
-   
-   Box(int boxValue){
-       this.boxValue = boxValue;
-   }
-   
-   /**
+    Box() {
+
+    }
+
+    Box(int boxValue) {
+        this.boxValue = boxValue;
+    }
+
+    /**
      * @return the boxValue
      */
     public int getBoxValue() {
@@ -58,6 +60,7 @@ class Box extends GraphicalObjs{
 
     @Override
     public void update(long updateInterval) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        setX(getX() + getVelocityX() * updateInterval);
     }
 }

@@ -8,13 +8,13 @@ package controller;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.InputEvent;
 
 /**
  *
  * @author dennisli
  */
-class JumpHandler implements EventHandler<Event>  {
+class JumpHandler implements EventHandler<InputEvent>  {
 
     private GameEngine gameEngine;
     public JumpHandler(){
@@ -26,9 +26,8 @@ class JumpHandler implements EventHandler<Event>  {
     }
     
     @Override
-    public void handle(Event event) {
-        gameEngine.getGameboard().getGraphicalObjCollector().getBird().jump();
-      
+    public void handle(InputEvent event) {
+        gameEngine.getGameboard().getGraphicalObjCollector().getBird().jump(); 
     }
     
 }

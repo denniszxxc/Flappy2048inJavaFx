@@ -5,8 +5,6 @@
  */
 package model;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Bird is the main object player control and play with
  * 
@@ -19,8 +17,8 @@ public class Bird extends GraphicalObjs{
     private static double BIRD_INIT_Y = 200;
     private static double BIRD_INIT_VELOCITY_X = 0;
     private static double BIRD_INIT_VELOCITY_Y = 0;
-    private static double BIRD_GRAVITY = 0.0000888;
-    private static double BIRD_JUMP_SPEED = -0.1;
+    private static double BIRD_GRAVITY = 0.0001;
+    private static double BIRD_JUMP_SPEED = -0.13;
    
     /**
      * The value of the bird, eg. 2,4,8...
@@ -96,13 +94,11 @@ public class Bird extends GraphicalObjs{
             super.setVelocityY(BIRD_JUMP_SPEED);
             jumping = false;
         }
-        long durationInMs = TimeUnit.NANOSECONDS.toMillis(updateInterval);
-
-        super.setVelocityY(super.getVelocityY() + BIRD_GRAVITY * durationInMs);
+        super.setVelocityY(super.getVelocityY() + BIRD_GRAVITY * updateInterval);
            
-        super.setY( getY() + getVelocityY() * durationInMs);
+        super.setY( getY() + getVelocityY() * updateInterval);
         
-        System.out.println(getY());
+        // System.out.println(getY());
         
         if(getY()>800 - BIRD_HEIGHT){
             System.out.println("Bottom");

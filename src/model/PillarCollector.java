@@ -20,24 +20,38 @@ public class PillarCollector extends GraphicalObjs{
     private long lastCreateInterval;
 
    PillarCollector(){
-       createPillarInterval = 1000;
+       createPillarInterval = 3000;
        lastCreateInterval = 0;
        pillars = new ArrayList<Pillar>();
        createPillar();
    }
    
+    /**
+     * @return the pillars
+     */
+    public ArrayList<Pillar> getPillars() {
+        return pillars;
+    }
+
+    /**
+     * @param pillars the pillars to set
+     */
+    public void setPillars(ArrayList<Pillar> pillars) {
+        this.pillars = pillars;
+    }
+    
    /**
     * Add a pillar to collector
     */
    public void createPillar(){
-       pillars.add(new Pillar());
+        getPillars().add(new Pillar());
    }
    
    /**
     * delete the oldest pillar
     */
    public void destoryOldestPillar(){
-       pillars.remove(0);
+        getPillars().remove(0);
    }
 
     @Override
@@ -49,7 +63,7 @@ public class PillarCollector extends GraphicalObjs{
             lastCreateInterval = 0;
         }
         
-        for(Pillar pillar: pillars){
+        for(Pillar pillar: getPillars()){
             pillar.update(updateInterval);
         }
     }
