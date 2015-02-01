@@ -6,19 +6,21 @@
 package model;
 
 /**
- * Abstracts of graphical objects will be displayed to user, 
- * having x,y property and velocity. Properties will be change by update method.
- * 
+ * Abstracts of graphical objects will be displayed to user, having x,y property
+ * and velocity. Properties will be change by update method.
+ *
  * @author dennisli
  */
 public abstract class GraphicalObjs {
+
     private double x;
     private double y;
     private double velocityX;
     private double velocityY;
-    
+
     /**
      * update object properties based on time
+     *
      * @param updateInterval the time used to update object properties
      */
     public abstract void update(long updateInterval);

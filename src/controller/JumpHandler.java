@@ -5,7 +5,6 @@
  */
 package controller;
 
-
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
@@ -14,20 +13,21 @@ import javafx.scene.input.InputEvent;
  *
  * @author dennisli
  */
-class JumpHandler implements EventHandler<InputEvent>  {
+class JumpHandler implements EventHandler<InputEvent> {
 
     private GameEngine gameEngine;
-    public JumpHandler(){
-        
+
+    public JumpHandler() {
+
     }
-    
-    public JumpHandler(GameEngine gameEngine){
+
+    public JumpHandler(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
     }
-    
+
     @Override
     public void handle(InputEvent event) {
-        gameEngine.getGameboard().getGraphicalObjCollector().getBird().jump(); 
+        gameEngine.getGameboard().getGraphicalObjCollector().getBird().jump();
     }
-    
+
 }

@@ -84,10 +84,10 @@ public class GameBoard {
 
         canvas.setOnMouseClicked(jumpHandler);
         canvas.setOnKeyPressed(jumpHandler);
-        
+
         StackPane root = new StackPane();
         root.getChildren().add(canvas);
-        
+
         return root;
     }
 
@@ -100,7 +100,7 @@ public class GameBoard {
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        
+
         drawBackGround(gc);
         drawBird(gc);
         drawPillars(gc);

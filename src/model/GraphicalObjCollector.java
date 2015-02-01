@@ -5,11 +5,9 @@
  */
 package model;
 
-import java.util.ArrayList;
-
 /**
  * Store position and values of graphical Objects shown on screen
- * 
+ *
  * @author dennisli
  */
 public class GraphicalObjCollector {
@@ -17,13 +15,13 @@ public class GraphicalObjCollector {
     private Bird bird;
     private Background background;
     private PillarCollector pillarCollector;
-    
-    public GraphicalObjCollector(){
+
+    public GraphicalObjCollector() {
         bird = new Bird();
         background = new Background();
         pillarCollector = new PillarCollector();
     }
-    
+
     /**
      * @return the bird
      */

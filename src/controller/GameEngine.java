@@ -14,30 +14,33 @@ import view.GameBoard;
  * @author dennisli
  */
 public class GameEngine {
-    public enum GameStatus{
+
+    public enum GameStatus {
+
         GAMESTART, GAMEPLAY, GAMEEND
     };
-    
+
     public final int REFRESH_INTERVAL = 30;
     private long lastUpdateTime;
     private long currentUpdateTime;
-    
+
     private GameBoard gameboard;
     private Pane pane;
-    private StartHandler startHandler;
-    private JumpHandler jumpHandler;
-    
+    private final StartHandler startHandler;
+    private final JumpHandler jumpHandler;
+
     private GameStatus gameStatus;
-    
-    public GameEngine(){
+
+    public GameEngine() {
         gameboard = new GameBoard();
         lastUpdateTime = 0;
         gameStatus = GameStatus.GAMESTART;
         startHandler = new StartHandler(this);
         jumpHandler = new JumpHandler(this);
-        
+
         pane = gameboard.startScreen(startHandler);
     }
+
     /**
      * @return the lastUpdateTime
      */
@@ -51,7 +54,7 @@ public class GameEngine {
     public void setLastUpdate(long lastUpdate) {
         this.lastUpdateTime = lastUpdate;
     }
-   
+
     /**
      * @return the gameboard
      */
@@ -79,31 +82,29 @@ public class GameEngine {
     public void setScene(Pane pane) {
         this.pane = pane;
     }
-   
-    public void startGame(){
+
+    public void startGame() {
         pane = gameboard.initGamePlay(jumpHandler);
         gameStatus = GameStatus.GAMEPLAY;
-        
+
     }
-    
-    /** 
-     * Update models in the current refresh 
-     * 
-     * @param newUpdateTime the system time when methods is called 
+
+    /**
+     * Update models in the current refresh
+     *
+     * @param newUpdateTime the system time when methods is called
      */
-    public void update(long newUpdateTime){
+    public void update(long newUpdateTime) {
         lastUpdateTime = currentUpdateTime;
         currentUpdateTime = newUpdateTime;
         long durationInMs = TimeUnit.NANOSECONDS.toMillis(currentUpdateTime - lastUpdateTime);
 
-        
-        
-        if(gameStatus == GameStatus.GAMEPLAY){           
+        if (gameStatus == GameStatus.GAMEPLAY) {
             gameboard.getGraphicalObjCollector().updateAll(durationInMs);
-            pane = gameboard.drawGamePlay(pane );
-            
-        } 
+            pane = gameboard.drawGamePlay(pane);
+
+        }
 
     }
-       
+
 }

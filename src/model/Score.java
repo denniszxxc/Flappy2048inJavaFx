@@ -7,10 +7,11 @@ package model;
 
 /**
  * Store and manipulate the game's current score and last 3 high score
- * 
+ *
  * @author dennisli
  */
 public class Score {
+
     private int currentScore;
     private int[] highScore;
 

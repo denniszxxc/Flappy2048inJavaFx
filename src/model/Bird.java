@@ -7,37 +7,38 @@ package model;
 
 /**
  * Bird is the main object player control and play with
- * 
+ *
  * @author dennisli
  */
-public class Bird extends GraphicalObjs{
-    public static double BIRD_WiDTH = 100;
-    public static double BIRD_HEIGHT = 100;
-    private static double BIRD_INIT_X = 80;
-    private static double BIRD_INIT_Y = 200;
-    private static double BIRD_INIT_VELOCITY_X = 0;
-    private static double BIRD_INIT_VELOCITY_Y = 0;
-    private static double BIRD_GRAVITY = 0.0001;
-    private static double BIRD_JUMP_SPEED = -0.13;
-   
+public class Bird extends GraphicalObjs {
+
+    public static final double BIRD_WiDTH = 100;
+    public static final double BIRD_HEIGHT = 100;
+    private static final double BIRD_INIT_X = 80;
+    private static final double BIRD_INIT_Y = 200;
+    private static final double BIRD_INIT_VELOCITY_X = 0;
+    private static final double BIRD_INIT_VELOCITY_Y = 0;
+    private static final double BIRD_GRAVITY = 0.0001;
+    private static final double BIRD_JUMP_SPEED = -0.13;
+
     /**
      * The value of the bird, eg. 2,4,8...
      */
     private int birdValue;
-    
+
     /**
      * state the bird is jumping
      */
     private boolean jumping;
-    
-    public Bird(){
-        super.setX(BIRD_INIT_X); 
+
+    public Bird() {
+        super.setX(BIRD_INIT_X);
         super.setY(BIRD_INIT_Y);
         super.setVelocityX(BIRD_INIT_VELOCITY_X);
         super.setVelocityY(BIRD_INIT_VELOCITY_Y);
-        
+
     }
-    
+
     /**
      * @return the birdValue
      */
@@ -67,42 +68,41 @@ public class Bird extends GraphicalObjs{
     }
 
     /**
-     * Start the bird's jump movement 
+     * Start the bird's jump movement
      */
-    public void jump(){
+    public void jump() {
         jumping = true;
         System.out.println("Jump!");
     }
-    
+
     /**
      * handle when bird collide with game boundary
      */
-    public void collideWithBoundary(){
-        
+    public void collideWithBoundary() {
+
     }
-    
+
     /**
      * handel when bird enter pillar(at the gap between of 2 boxes)
      */
-    public void enterBoxGap(){
-        
+    public void enterBoxGap() {
+
     }
 
     @Override
     public synchronized void update(long updateInterval) {
-        if(jumping){
+        if (jumping) {
             super.setVelocityY(BIRD_JUMP_SPEED);
             jumping = false;
         }
         super.setVelocityY(super.getVelocityY() + BIRD_GRAVITY * updateInterval);
-           
-        super.setY( getY() + getVelocityY() * updateInterval);
-        
+
+        super.setY(getY() + getVelocityY() * updateInterval);
+
         // System.out.println(getY());
-        
-        if(getY()>800 - BIRD_HEIGHT){
+        if (getY() > 800 - BIRD_HEIGHT) {
             System.out.println("Bottom");
         }
     }
-    
+
 }

@@ -11,24 +11,26 @@ import javafx.scene.image.Image;
 
 /**
  * Background objects' information
+ *
  * @author dennisli
  */
-public class Background extends GraphicalObjs{
+public class Background extends GraphicalObjs {
+
     private final double BG_INIT_X = 0;
     private final double BG_INIT_Y = 0;
     private final double BG_VELOCITY_X = 0.005;
     private final double BG_VELOCITY_Y = 0.0;
-    
+
     private Image cloud;
     private Image sky;
 
-    public Background(){
+    public Background() {
         super.setX(BG_INIT_X);
         super.setY(BG_INIT_Y);
         super.setVelocityX(BG_VELOCITY_X);
         super.setVelocityY(BG_VELOCITY_Y);
     }
-    
+
     /**
      * @return the cloud
      */

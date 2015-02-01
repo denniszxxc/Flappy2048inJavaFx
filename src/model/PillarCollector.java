@@ -8,10 +8,12 @@ package model;
 import java.util.ArrayList;
 
 /**
- * Store, created, delete Pillars in game 
+ * Store, created, delete Pillars in game
+ *
  * @author dennisli
  */
-public class PillarCollector extends GraphicalObjs{
+public class PillarCollector extends GraphicalObjs {
+
     /**
      * interval in MilliSeconds between create 2 pillars
      */
@@ -19,13 +21,13 @@ public class PillarCollector extends GraphicalObjs{
     private ArrayList<Pillar> pillars;
     private long lastCreateInterval;
 
-   PillarCollector(){
-       createPillarInterval = 3000;
-       lastCreateInterval = 0;
-       pillars = new ArrayList<Pillar>();
-       createPillar();
-   }
-   
+    PillarCollector() {
+        createPillarInterval = 3000;
+        lastCreateInterval = 0;
+        pillars = new ArrayList<Pillar>();
+        createPillar();
+    }
+
     /**
      * @return the pillars
      */
@@ -39,31 +41,31 @@ public class PillarCollector extends GraphicalObjs{
     public void setPillars(ArrayList<Pillar> pillars) {
         this.pillars = pillars;
     }
-    
-   /**
-    * Add a pillar to collector
-    */
-   public void createPillar(){
+
+    /**
+     * Add a pillar to collector
+     */
+    public void createPillar() {
         getPillars().add(new Pillar());
-   }
-   
-   /**
-    * delete the oldest pillar
-    */
-   public void destoryOldestPillar(){
+    }
+
+    /**
+     * delete the oldest pillar
+     */
+    public void destoryOldestPillar() {
         getPillars().remove(0);
-   }
+    }
 
     @Override
     public void update(long updateInterval) {
         lastCreateInterval += updateInterval;
-        
-        if(lastCreateInterval >= createPillarInterval){
+
+        if (lastCreateInterval >= createPillarInterval) {
             createPillar();
             lastCreateInterval = 0;
         }
-        
-        for(Pillar pillar: getPillars()){
+
+        for (Pillar pillar : getPillars()) {
             pillar.update(updateInterval);
         }
     }

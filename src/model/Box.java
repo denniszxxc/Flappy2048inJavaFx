@@ -5,13 +5,12 @@
  */
 package model;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  *
  * @author dennisli
  */
 public class Box extends GraphicalObjs {
+
     public static final int BOX_DIMENTION = 100;
     /**
      * the Value on a box
@@ -60,7 +59,7 @@ public class Box extends GraphicalObjs {
 
     @Override
     public void update(long updateInterval) {
-        
+
         setX(getX() + getVelocityX() * updateInterval);
     }
 }
