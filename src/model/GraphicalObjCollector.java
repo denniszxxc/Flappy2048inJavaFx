@@ -73,8 +73,8 @@ public class GraphicalObjCollector {
      */
     public void updateAll(long updateInterval) {
         getBird().update(updateInterval);
-        getBackground().update(updateInterval);
-        getPillars().update(updateInterval);
+        // getBackground().update(updateInterval);
+        // getPillars().update(updateInterval);
     }
 
 }

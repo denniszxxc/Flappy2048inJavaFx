@@ -7,7 +7,6 @@ package controller;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import model.GraphicalObjCollector;
 import view.GameBoard;
 
 /**
@@ -83,6 +82,10 @@ public class GameEngine {
         pane = new StackPane();
         gameStatus = GameStatus.GAMEPLAY;
         
+        // Jump handler
+        pane.setOnKeyTyped(e->{
+            gameboard.getGraphicalObjCollector().getBird().jump();
+        });
         pane.setOnKeyTyped(e->{
             gameboard.getGraphicalObjCollector().getBird().jump();
         });
@@ -97,12 +100,12 @@ public class GameEngine {
         lastUpdateTime = currentUpdateTime;
         currentUpdateTime = newUpdateTime;
         
-        gameboard.getGraphicalObjCollector().updateAll(lastUpdateTime - currentUpdateTime);
+        gameboard.getGraphicalObjCollector().updateAll(currentUpdateTime - lastUpdateTime);
         
         
         if(gameStatus == GameStatus.GAMEPLAY){
             pane = gameboard.drawGamePlay(pane);
-        }
+        } 
 
     }
        
