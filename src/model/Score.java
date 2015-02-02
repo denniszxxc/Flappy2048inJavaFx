@@ -5,6 +5,9 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  * Store and manipulate the game's current score and last 3 high score
  *
@@ -13,8 +16,13 @@ package model;
 public class Score {
 
     private int currentScore;
-    private int[] highScore;
+    private ArrayList<Integer> highScore;
 
+    public Score(){
+        currentScore = 0;
+        highScore = new ArrayList<Integer>();
+    }
+    
     /**
      * @return the currentScore
      */
@@ -32,14 +40,16 @@ public class Score {
     /**
      * @return the highScore
      */
-    public int[] getHighScore() {
+    public ArrayList<Integer> getHighScore() {
         return highScore;
     }
-
+    
     /**
-     * @param highScore the highScore to set
+     * Insert currentScore into a sorted highScore Lists
      */
-    public void setHighScore(int[] highScore) {
-        this.highScore = highScore;
+    public void updateHighscore(){
+        
+        highScore.add(currentScore);
+        Collections.sort(highScore);
     }
 }

@@ -14,14 +14,17 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import model.Bird;
 import model.GraphicalObjCollector;
 import model.Pillar;
 import model.Box;
+import model.Score;
 
 /**
  * This Class manipulate every graphical compoents on screen
@@ -35,9 +38,15 @@ public class GameBoard {
     
     private Canvas canvas;
     private GraphicalObjCollector graphicalObjCollector;
+    private Score score;
 
     public GameBoard() {
         graphicalObjCollector = new GraphicalObjCollector();
+    }
+    
+    public GameBoard(Score score) {
+        graphicalObjCollector = new GraphicalObjCollector();
+        this.score = score;
     }
 
     public GraphicalObjCollector getGraphicalObjCollector() {
@@ -74,20 +83,33 @@ public class GameBoard {
         btn.setText("Restart");
         btn.setOnAction(restartHandler);
 
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
+        Text txt = new Text();
+        String str = "";
+        for(int score: score.getHighScore()){
+            str+= Integer.toString(score) + "\n ";
+        }
+        
+        txt.setText(str);
+        
+        VBox vbox = new VBox();
+        
+        vbox.getChildren().add(txt);
+        vbox.getChildren().add(btn);
 
+        StackPane root = new StackPane();
+        root.getChildren().add(vbox);
         return root;
     }
 
     public Pane initGamePlay(EventHandler jumpHandler) {
         canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setOnMouseClicked(jumpHandler);
-        canvas.setOnKeyPressed(jumpHandler);
+        //canvas.setOnKeyPressed(jumpHandler);
 
         StackPane root = new StackPane();
         root.getChildren().add(canvas);
-
+        root.setOnKeyPressed(jumpHandler);
+            
         graphicalObjCollector = new GraphicalObjCollector();
         
         return root;
@@ -96,6 +118,7 @@ public class GameBoard {
     /**
      * Draw the graphical objects on screen
      *
+     * @param root
      * @return root
      */
     public Pane drawGamePlay(Pane root) {
@@ -106,12 +129,8 @@ public class GameBoard {
         drawBackGround(gc);
         drawPillars(gc);
         drawBird(gc);
+        drawScore(gc);
         
-        root.getChildren().clear();
-        root.getChildren().add(canvas);
-
-        // root.getChildren().clear();
-        // root.getChildren().add(btn);
         return root;
     }
 
@@ -172,5 +191,16 @@ public class GameBoard {
     public void drawBackGround(GraphicsContext gc) {
         gc.setFill(Color.SKYBLUE);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    }
+    
+    public void drawScore(GraphicsContext gc){
+        gc.setTextAlign(TextAlignment.RIGHT);
+        gc.setTextBaseline(VPos.TOP);
+        gc.setFill(Color.BLACK);
+        gc.setFont(new Font("Arial Bold",32));
+
+        gc.fillText("Score: " + Integer.toString(score.getCurrentScore()),
+                canvas.getWidth(), 0);
+
     }
 }

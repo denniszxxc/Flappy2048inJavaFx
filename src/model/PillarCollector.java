@@ -18,13 +18,15 @@ public class PillarCollector extends GraphicalObjs {
      * interval in MilliSeconds between create 2 pillars
      */
     private long createPillarInterval;
-    private ArrayList<Pillar> pillars;
     private long lastCreateInterval;
+    private int newPillarBoxMinimunValue;
+    private ArrayList<Pillar> pillars;
 
     PillarCollector() {
-        createPillarInterval = 3000;
+        createPillarInterval = 5000;
         lastCreateInterval = 0;
         pillars = new ArrayList<Pillar>();
+        newPillarBoxMinimunValue = 2;
         createPillar();
     }
 
@@ -42,6 +44,13 @@ public class PillarCollector extends GraphicalObjs {
         this.pillars = pillars;
     }
 
+    /**
+     * @param newPillarBoxMinimunValue the newPillarBoxMinimunValue to set
+     */
+    public void setNewPillarBoxMinimunValue(int newPillarBoxMinimunValue) {
+        this.newPillarBoxMinimunValue = newPillarBoxMinimunValue;
+    }
+    
     /**
      * Add a pillar to collector
      */

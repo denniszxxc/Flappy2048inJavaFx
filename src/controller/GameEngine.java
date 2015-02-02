@@ -7,6 +7,7 @@ package controller;
 
 import java.util.concurrent.TimeUnit;
 import javafx.scene.layout.Pane;
+import model.Score;
 import view.GameBoard;
 
 /**
@@ -20,25 +21,27 @@ public class GameEngine {
         GAMESTART, GAMEPLAY, GAMEEND
     };
 
-    public final int REFRESH_INTERVAL = 30;
+    public final int REFRESH_INTERVAL = 25;
     private long lastUpdateTime;
     private long currentUpdateTime;
 
+    private Score score;
     private GameBoard gameboard;
     private Pane pane;
     private final StartHandler startHandler;
     private final JumpHandler jumpHandler;
     private CollisionController collisionController;
-
+    
     private GameStatus gameStatus;
 
     public GameEngine() {
-        gameboard = new GameBoard();
+        score = new Score();
+        gameboard = new GameBoard(score);
         lastUpdateTime = 0;
         gameStatus = GameStatus.GAMESTART;
         startHandler = new StartHandler(this);
         jumpHandler = new JumpHandler(this);
-
+        
         pane = gameboard.startScreen(startHandler);
     }
 
@@ -86,6 +89,7 @@ public class GameEngine {
 
     public void endGame() {
         gameStatus = GameStatus.GAMEEND;
+        score.updateHighscore();
         pane = gameboard.endScreen(startHandler);
     }
 
@@ -93,7 +97,9 @@ public class GameEngine {
         pane = gameboard.initGamePlay(jumpHandler);
         gameStatus = GameStatus.GAMEPLAY;
         collisionController = new CollisionController(
-                gameboard.getGraphicalObjCollector(), gameboard.CANVAS_HEIGHT);
+                gameboard.getGraphicalObjCollector(), gameboard.CANVAS_HEIGHT, 
+                score );
+        score.setCurrentScore(0);
     }
 
     /**
@@ -105,7 +111,7 @@ public class GameEngine {
         lastUpdateTime = currentUpdateTime;
         currentUpdateTime = newUpdateTime;
         long durationInMs = TimeUnit.NANOSECONDS.toMillis(currentUpdateTime - lastUpdateTime);
-
+        
         if (gameStatus == GameStatus.GAMEPLAY) {
             gameboard.getGraphicalObjCollector().updateAll(durationInMs);
             pane = gameboard.drawGamePlay(pane);

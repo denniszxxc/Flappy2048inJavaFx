@@ -94,8 +94,11 @@ public class Pillar extends GraphicalObjs {
      * @return Box in the pillar on the yposistion
      */
     public Box getBox(double yPosition){
-        assert yPosition >= 0 ;
-        return boxes[ (int) Math.floor(yPosition / Box.BOX_DIMENTION)];
+        if(yPosition >= 0){
+            return boxes[ (int) Math.floor(yPosition / Box.BOX_DIMENTION)];
+        } else {
+            return null;
+        }
     }
     
     @Override

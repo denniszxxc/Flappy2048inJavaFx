@@ -9,6 +9,7 @@ import model.Bird;
 import model.Box;
 import model.GraphicalObjCollector;
 import model.PillarCollector;
+import model.Score;
 
 /**
  *
@@ -23,15 +24,17 @@ class CollisionController {
     private PillarCollector pillarCollector;
     private int canvasHeight;
     private boolean hitWrongBox;
+    private Score score;
 
     CollisionController() {
     }
 
-    CollisionController(GraphicalObjCollector goc, int canvasHeight) {
+    CollisionController(GraphicalObjCollector goc, int canvasHeight, Score score) {
         bird = goc.getBird();
         pillarCollector = goc.getPillarCollector();
         this.canvasHeight = canvasHeight;
         hitWrongBox = false;
+        this.score = score;
     }
 
     public boolean birdHitBottom() {
@@ -44,13 +47,14 @@ class CollisionController {
                     + collisionToleranceY);
             Box lowBox = pillarCollector.getLeftmostPillar().getBox(bird.getY()
                     + Bird.BIRD_HEIGHT - collisionToleranceY);
-            if (highBox != lowBox) {
+            if (highBox != lowBox || highBox == null) {
                 hitWrongBox = true;
             } else if(highBox.getBoxValue() != bird.getBirdValue()) { 
                 hitWrongBox = true;
             } else {
                 bird.setBirdValue(bird.getBirdValue() * bird.getBirdValue());
-                //score
+                pillarCollector.setNewPillarBoxMinimunValue(bird.getBirdValue());
+                score.setCurrentScore(score.getCurrentScore() + bird.getBirdValue());
                 bird.enterBoxGap(highBox.getY());
             }
         } else if(birdInsidetPillar()) {
