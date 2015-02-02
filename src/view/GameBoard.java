@@ -103,8 +103,11 @@ public class GameBoard {
 
     public Pane initGamePlay(EventHandler jumpHandler) {
         canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+        canvas.setFocusTraversable(true);
+        canvas.requestFocus();
+        
         canvas.setOnMouseClicked(jumpHandler);
-        //canvas.setOnKeyPressed(jumpHandler);
+        canvas.setOnKeyPressed(jumpHandler);
 
         StackPane root = new StackPane();
         root.getChildren().add(canvas);
