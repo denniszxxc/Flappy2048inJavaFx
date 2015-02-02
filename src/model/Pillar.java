@@ -87,6 +87,17 @@ public class Pillar extends GraphicalObjs {
         return valList;
     }
 
+    /**
+     * retrun the box in pillar using the y position (counting from top at 0)
+     * 
+     * @param yPosition the y posistion in pixel 
+     * @return Box in the pillar on the yposistion
+     */
+    public Box getBox(double yPosition){
+        assert yPosition >= 0 ;
+        return boxes[ (int) Math.floor(yPosition / Box.BOX_DIMENTION)];
+    }
+    
     @Override
     public void update(long updateInterval) {
         super.setX(getX() + getVelocityX() * updateInterval);

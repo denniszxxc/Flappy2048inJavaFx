@@ -56,6 +56,15 @@ public class PillarCollector extends GraphicalObjs {
         getPillars().remove(0);
     }
 
+    public Pillar getLeftmostPillar(){
+        return getPillars().get(0);
+    }
+    
+    
+    /**
+     * 
+     * @param updateInterval 
+     */
     @Override
     public void update(long updateInterval) {
         lastCreateInterval += updateInterval;
@@ -63,6 +72,10 @@ public class PillarCollector extends GraphicalObjs {
         if (lastCreateInterval >= createPillarInterval) {
             createPillar();
             lastCreateInterval = 0;
+        }
+        
+        if(getLeftmostPillar().getX() < -Box.BOX_DIMENTION){
+            destoryOldestPillar();
         }
 
         for (Pillar pillar : getPillars()) {

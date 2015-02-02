@@ -36,7 +36,8 @@ public class Bird extends GraphicalObjs {
         super.setY(BIRD_INIT_Y);
         super.setVelocityX(BIRD_INIT_VELOCITY_X);
         super.setVelocityY(BIRD_INIT_VELOCITY_Y);
-
+        
+        birdValue = 2;
     }
 
     /**
@@ -76,21 +77,15 @@ public class Bird extends GraphicalObjs {
     }
 
     /**
-     * handle when bird collide with game boundary
-     */
-    public void collideWithBoundary() {
-
-    }
-
-    /**
      * handel when bird enter pillar(at the gap between of 2 boxes)
      */
-    public void enterBoxGap() {
-
+    public void enterBoxGap(double boxYCoord) {
+        setY(boxYCoord);
+        setVelocityY(0);
     }
 
     @Override
-    public synchronized void update(long updateInterval) {
+    public void update(long updateInterval) {
         if (jumping) {
             super.setVelocityY(BIRD_JUMP_SPEED);
             jumping = false;
@@ -99,10 +94,6 @@ public class Bird extends GraphicalObjs {
 
         super.setY(getY() + getVelocityY() * updateInterval);
 
-        // System.out.println(getY());
-        if (getY() > 800 - BIRD_HEIGHT) {
-            System.out.println("Bottom");
-        }
     }
 
 }

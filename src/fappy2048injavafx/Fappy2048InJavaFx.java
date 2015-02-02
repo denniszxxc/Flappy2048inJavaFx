@@ -28,7 +28,8 @@ public class Fappy2048InJavaFx extends Application {
     @Override
     public void start(Stage primaryStage) {
         gameEngine = new GameEngine();
-        Scene scene = new Scene(gameEngine.getPane(), 800, 600);
+        Scene scene = new Scene(gameEngine.getPane(),
+                gameEngine.getGameboard().CANVAS_WIDTH, gameEngine.getGameboard().CANVAS_HEIGHT);
         primaryStage.setTitle("Flappy2048 in JavaFx!");
         primaryStage.setScene(scene);
 
@@ -46,7 +47,7 @@ public class Fappy2048InJavaFx extends Application {
         animation.play();
 
     }
-
+    
     /**
      * @param args the command line arguments
      */

@@ -28,6 +28,7 @@ public class GameEngine {
     private Pane pane;
     private final StartHandler startHandler;
     private final JumpHandler jumpHandler;
+    private CollisionController collisionController;
 
     private GameStatus gameStatus;
 
@@ -83,10 +84,16 @@ public class GameEngine {
         this.pane = pane;
     }
 
+    public void endGame() {
+        gameStatus = GameStatus.GAMEEND;
+        pane = gameboard.endScreen(startHandler);
+    }
+
     public void startGame() {
         pane = gameboard.initGamePlay(jumpHandler);
         gameStatus = GameStatus.GAMEPLAY;
-
+        collisionController = new CollisionController(
+                gameboard.getGraphicalObjCollector(), gameboard.CANVAS_HEIGHT);
     }
 
     /**
@@ -102,6 +109,13 @@ public class GameEngine {
         if (gameStatus == GameStatus.GAMEPLAY) {
             gameboard.getGraphicalObjCollector().updateAll(durationInMs);
             pane = gameboard.drawGamePlay(pane);
+
+            collisionController.birdPillarCollisonCheck();
+
+            if (collisionController.birdHitBottom()
+                    || collisionController.isHitWrongBox()) {
+                endGame();
+            }
 
         }
 

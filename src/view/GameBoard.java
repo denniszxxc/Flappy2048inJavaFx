@@ -30,6 +30,9 @@ import model.Box;
  */
 public class GameBoard {
 
+    public final int CANVAS_WIDTH = 800;
+    public final int CANVAS_HEIGHT = 600;
+    
     private Canvas canvas;
     private GraphicalObjCollector graphicalObjCollector;
 
@@ -60,18 +63,16 @@ public class GameBoard {
     /**
      * Display the end screen
      *
+     * @param restartHandler restart button on action handler
      * @return root pane with graphic elements
      */
-    public Pane endScreen() {
+    public Pane endScreen(EventHandler restartHandler) {
+        System.out.println("END GAME");
+        canvas = null;
+        
         Button btn = new Button();
-        btn.setText("END");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("DO Sth in endScreen");
-            }
-        });
+        btn.setText("Restart");
+        btn.setOnAction(restartHandler);
 
         StackPane root = new StackPane();
         root.getChildren().add(btn);
@@ -80,14 +81,15 @@ public class GameBoard {
     }
 
     public Pane initGamePlay(EventHandler jumpHandler) {
-        canvas = new Canvas(800, 600);
-
+        canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setOnMouseClicked(jumpHandler);
         canvas.setOnKeyPressed(jumpHandler);
 
         StackPane root = new StackPane();
         root.getChildren().add(canvas);
 
+        graphicalObjCollector = new GraphicalObjCollector();
+        
         return root;
     }
 
@@ -102,9 +104,9 @@ public class GameBoard {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         drawBackGround(gc);
-        drawBird(gc);
         drawPillars(gc);
-
+        drawBird(gc);
+        
         root.getChildren().clear();
         root.getChildren().add(canvas);
 
