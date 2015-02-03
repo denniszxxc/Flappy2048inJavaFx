@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fappy2048injavafx;
+package flappy2048injavafx;
 
 import controller.GameEngine;
 import javafx.animation.KeyFrame;
@@ -19,7 +19,7 @@ import javafx.util.Duration;
  *
  * @author dennisli
  */
-public class Fappy2048InJavaFx extends Application {
+public class Flappy2048InJavaFx extends Application {
 
     private GameEngine gameEngine;
     private Scene scene;
@@ -37,7 +37,6 @@ public class Fappy2048InJavaFx extends Application {
         EventHandler<ActionEvent> eventHandler = e -> {
             gameEngine.update(System.nanoTime());
             scene.setRoot(gameEngine.getPane());
-
             primaryStage.show();
         };
 
