@@ -17,8 +17,8 @@ import model.Score;
  */
 class CollisionController {
 
-    private static final double collisionToleranceX = -5.5;
-    private static final double collisionToleranceY = 10.0;
+    private static final double collisionToleranceX = -5;
+    private static final double collisionToleranceY = 40.0;
 
     private Bird bird;
     private PillarCollector pillarCollector;
@@ -47,19 +47,25 @@ class CollisionController {
                     + collisionToleranceY);
             Box lowBox = pillarCollector.getLeftmostPillar().getBox(bird.getY()
                     + Bird.BIRD_HEIGHT - collisionToleranceY);
+            System.out.print(bird.getY() + collisionToleranceY);
+            System.out.print("\t");
+            System.out.println(highBox.getBoxValue());
+
+            System.out.print(bird.getY()
+                    + Bird.BIRD_HEIGHT - collisionToleranceY);
+            System.out.print("\t");
+            System.out.println(lowBox.getBoxValue());
             if (highBox != lowBox || highBox == null) {
                 hitWrongBox = true;
-            } else if(highBox.getBoxValue() != bird.getBirdValue()) { 
+            } else if (highBox.getBoxValue() != bird.getBirdValue()) {
                 hitWrongBox = true;
             } else {
-                bird.setBirdValue(bird.getBirdValue() * bird.getBirdValue());
+                bird.setBirdValue(bird.getBirdValue() * 2);
                 pillarCollector.setNewPillarBoxMinimunValue(bird.getBirdValue());
                 score.setCurrentScore(score.getCurrentScore() + bird.getBirdValue());
                 bird.enterBoxGap(highBox.getY());
             }
-        } else if(birdInsidetPillar()) {
-            bird.enterBoxGap(bird.getY());
-        }
+        } 
     }
 
     public boolean birdRightHitPillar() {
@@ -76,6 +82,7 @@ class CollisionController {
         return birdRightEdgeX > leftmostPillarPositionX
                 && leftmostPillarPositionX < leftmostPillarPositionX + Box.BOX_DIMENTION;
     }
+    
     /**
      * @return the hitWrongBox
      */

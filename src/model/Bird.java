@@ -18,8 +18,8 @@ public class Bird extends GraphicalObjs {
     private static final double BIRD_INIT_Y = 200;
     private static final double BIRD_INIT_VELOCITY_X = 0;
     private static final double BIRD_INIT_VELOCITY_Y = 0;
-    private static final double BIRD_GRAVITY = 0.0001;
-    private static final double BIRD_JUMP_SPEED = -0.13;
+    private static final double BIRD_GRAVITY = 0.0002;
+    private static final double BIRD_JUMP_SPEED = -0.15;
 
     /**
      * The value of the bird, eg. 2,4,8...
@@ -30,7 +30,7 @@ public class Bird extends GraphicalObjs {
      * state the bird is jumping
      */
     private boolean jumping;
-
+    
     public Bird() {
         super.setX(BIRD_INIT_X);
         super.setY(BIRD_INIT_Y);
@@ -38,6 +38,7 @@ public class Bird extends GraphicalObjs {
         super.setVelocityY(BIRD_INIT_VELOCITY_Y);
         
         birdValue = 2;
+        jumping = false;
     }
 
     /**
@@ -78,12 +79,13 @@ public class Bird extends GraphicalObjs {
 
     /**
      * handel when bird enter pillar(at the gap between of 2 boxes)
+     * @param boxYCoord
      */
     public void enterBoxGap(double boxYCoord) {
         setY(boxYCoord);
         setVelocityY(0);
     }
-
+    
     @Override
     public void update(long updateInterval) {
         if (jumping) {
