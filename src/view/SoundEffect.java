@@ -40,7 +40,7 @@ public class SoundEffect {
     }
     
     public void playHitCorrectBoxSound() {
-        if (hitCorrectBoxSoundEffect.isPlaying()) {
+        if (!hitCorrectBoxSoundEffect.isPlaying()) {
             hitCorrectBoxSoundEffect.play();
         }
     }

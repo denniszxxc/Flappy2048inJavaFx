@@ -10,6 +10,7 @@ import model.Box;
 import model.GraphicalObjCollector;
 import model.PillarCollector;
 import model.Score;
+import view.SoundEffect;
 
 /**
  *
@@ -24,17 +25,20 @@ class CollisionController {
     private int canvasHeight;
     private boolean hitWrongBox;
     private Score score;
+    private SoundEffect soundEffect;
     private boolean firstCollision;
 
     CollisionController() {
     }
 
-    CollisionController(GraphicalObjCollector goc, int canvasHeight, Score score) {
+    CollisionController(GraphicalObjCollector goc, int canvasHeight, 
+            Score score, SoundEffect soundEffect) {
         bird = goc.getBird();
         pillarCollector = goc.getPillarCollector();
         this.canvasHeight = canvasHeight;
         hitWrongBox = false;
         this.score = score;
+        this.soundEffect = soundEffect;
         
         firstCollision = false;
     }
@@ -62,6 +66,7 @@ class CollisionController {
                     pillarCollector.setNewPillarBoxMinimunValue(bird.getBirdValue());
                     score.setCurrentScore(score.getCurrentScore() + bird.getBirdValue());
                     bird.enterBoxGap(highBox.getY());
+                    soundEffect.playHitCorrectBoxSound();
                 }
             } else {
                 bird.enterBoxGap(bird.getY());

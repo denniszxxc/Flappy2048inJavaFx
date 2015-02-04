@@ -108,7 +108,7 @@ public class GameEngine {
         gameStatus = GameStatus.GAMEPLAY;
         collisionController = new CollisionController(
                 gameboard.getGraphicalObjCollector(), gameboard.CANVAS_HEIGHT, 
-                score );
+                score, soundEffect );
         score.setCurrentScore(0);
     }
 
@@ -130,6 +130,7 @@ public class GameEngine {
 
             if (collisionController.birdHitBottom()
                     || collisionController.isHitWrongBox()) {
+                soundEffect.playHitWallSound();
                 endGame();
             }
 
