@@ -17,7 +17,6 @@ import model.Score;
  */
 class CollisionController {
 
-    private static final double collisionToleranceX = -4;
     private static final double collisionToleranceY = 40.0;
 
     private Bird bird;
@@ -25,7 +24,7 @@ class CollisionController {
     private int canvasHeight;
     private boolean hitWrongBox;
     private Score score;
-    private boolean firstCollide;
+    private boolean firstCollision;
 
     CollisionController() {
     }
@@ -37,7 +36,7 @@ class CollisionController {
         hitWrongBox = false;
         this.score = score;
         
-        firstCollide = false;
+        firstCollision = false;
     }
 
     public boolean birdHitBottom() {
@@ -46,8 +45,8 @@ class CollisionController {
 
     public void birdPillarCollisonCheck() {
         if(birdInsidetPillar()) {
-            if (firstCollide) {
-                firstCollide = false;
+            if (firstCollision) {
+                firstCollision = false;
                 
                 Box highBox = pillarCollector.getLeftmostPillar().getBox(bird.getY()
                         + collisionToleranceY);
@@ -68,7 +67,7 @@ class CollisionController {
                 bird.enterBoxGap(bird.getY());
             }
         } else {
-            firstCollide = true;
+            firstCollision = true;
         }
     }
 
