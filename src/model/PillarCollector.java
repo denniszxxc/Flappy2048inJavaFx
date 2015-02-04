@@ -27,7 +27,7 @@ public class PillarCollector extends GraphicalObjs {
         lastCreateInterval = 0;
         pillars = new ArrayList<Pillar>();
         newPillarBoxMinimunValue = 2;
-        createPillar();
+        createPillar(newPillarBoxMinimunValue);
     }
 
     /**
@@ -54,8 +54,8 @@ public class PillarCollector extends GraphicalObjs {
     /**
      * Add a pillar to collector
      */
-    public void createPillar() {
-        getPillars().add(new Pillar());
+    public void createPillar(int newPillarBoxMinimunValue) {
+        getPillars().add(new Pillar(newPillarBoxMinimunValue));
     }
 
     /**
@@ -79,7 +79,7 @@ public class PillarCollector extends GraphicalObjs {
         lastCreateInterval += updateInterval;
 
         if (lastCreateInterval >= createPillarInterval) {
-            createPillar();
+            createPillar(newPillarBoxMinimunValue);
             lastCreateInterval = 0;
         }
         

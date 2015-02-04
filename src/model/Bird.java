@@ -31,6 +31,11 @@ public class Bird extends GraphicalObjs {
      */
     private boolean jumping;
     
+    /**
+     * state the bird is inside box gap
+     */
+    private boolean insideBoxGap;
+    
     public Bird() {
         super.setX(BIRD_INIT_X);
         super.setY(BIRD_INIT_Y);
@@ -39,6 +44,7 @@ public class Bird extends GraphicalObjs {
         
         birdValue = 2;
         jumping = false;
+        insideBoxGap = false;
     }
 
     /**
@@ -70,6 +76,13 @@ public class Bird extends GraphicalObjs {
     }
 
     /**
+     * @param insideBoxGap the insideBoxGap to set
+     */
+    public void setInsideBoxGap(boolean insideBoxGap) {
+        this.insideBoxGap = insideBoxGap;
+    }
+    
+    /**
      * Start the bird's jump movement
      */
     public void jump() {
@@ -82,20 +95,22 @@ public class Bird extends GraphicalObjs {
      * @param boxYCoord
      */
     public void enterBoxGap(double boxYCoord) {
+        setInsideBoxGap(true);
         setY(boxYCoord);
         setVelocityY(0);
     }
     
     @Override
     public void update(long updateInterval) {
-        if (jumping) {
+        if (jumping && !insideBoxGap) {
             super.setVelocityY(BIRD_JUMP_SPEED);
             jumping = false;
         }
-        super.setVelocityY(super.getVelocityY() + BIRD_GRAVITY * updateInterval);
-
+        if(!insideBoxGap){
+            super.setVelocityY(super.getVelocityY() + BIRD_GRAVITY * updateInterval);
+        }
         super.setY(getY() + getVelocityY() * updateInterval);
 
     }
 
-}
+ }

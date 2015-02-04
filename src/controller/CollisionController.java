@@ -53,7 +53,7 @@ class CollisionController {
                 Box lowBox = pillarCollector.getLeftmostPillar().getBox(bird.getY()
                         + Bird.BIRD_HEIGHT - collisionToleranceY);
 
-                if (highBox != lowBox || highBox == null) {
+                if (highBox != lowBox) {
                     hitWrongBox = true;
                 } else if (highBox.getBoxValue() != bird.getBirdValue()) {
                     hitWrongBox = true;
@@ -68,6 +68,7 @@ class CollisionController {
             }
         } else {
             firstCollision = true;
+            bird.setInsideBoxGap(false);
         }
     }
 

@@ -32,7 +32,7 @@ public class Pillar extends GraphicalObjs {
         super.setVelocityY(PILLAR_INIT_VELOCITY_Y);
 
         boxes = new Box[BOX_NUMBER];
-        int[] valList = generateBoxValList();
+        int[] valList = generateBoxValList(2);
         for (int i = 0; i < BOX_NUMBER; i++) {
             boxes[i] = new Box(valList[i]);
             boxes[i].setX(PILLAR_INIT_X);
@@ -41,14 +41,27 @@ public class Pillar extends GraphicalObjs {
             boxes[i].setVelocityY(PILLAR_INIT_VELOCITY_Y);
         }
     }
-
+    
     /**
      * Constructing a new pillar with birds score as reference to box value
      *
-     * @param birdValue
+     * @param boxMinValue
      */
-    Pillar(int birdValue) {
+    Pillar(int boxMinValue){
+        super.setX(PILLAR_INIT_X);
+        super.setY(PILLAR_INIT_Y);
+        super.setVelocityX(PILLAR_INIT_VELOCITY_X);
+        super.setVelocityY(PILLAR_INIT_VELOCITY_Y);
 
+        boxes = new Box[BOX_NUMBER];
+        int[] valList = generateBoxValList(boxMinValue);
+        for (int i = 0; i < BOX_NUMBER; i++) {
+            boxes[i] = new Box(valList[i]);
+            boxes[i].setX(PILLAR_INIT_X);
+            boxes[i].setY(Box.BOX_DIMENTION * i);
+            boxes[i].setVelocityX(PILLAR_INIT_VELOCITY_X);
+            boxes[i].setVelocityY(PILLAR_INIT_VELOCITY_Y);
+        }
     }
 
     /**
@@ -70,10 +83,10 @@ public class Pillar extends GraphicalObjs {
      *
      * @return random order List of (2,4,8,16,32,64)
      */
-    private int[] generateBoxValList() {
+    private int[] generateBoxValList(int boxMinValue) {
         int[] valList = new int[BOX_NUMBER];
-        for (int i = 0; i < BOX_NUMBER; i++) {
-            valList[i] = (int) Math.pow(2.0, i + 1.0);
+        for (int i = 0 ; i < BOX_NUMBER; i++) {
+            valList[i] = boxMinValue * (int) Math.pow(2, i) ;
         }
 
         for (int i = 0; i < BOX_NUMBER; i++) {
@@ -97,7 +110,7 @@ public class Pillar extends GraphicalObjs {
         if(yPosition >= 0){
             return boxes[ (int) Math.floor(yPosition / Box.BOX_DIMENTION)];
         } else {
-            return null;
+            return new Box(-1);
         }
     }
     
