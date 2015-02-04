@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import javafx.scene.layout.Pane;
 import model.Score;
 import view.GameBoard;
+import view.SoundEffect;
 
 /**
  *
@@ -26,6 +27,7 @@ public class GameEngine {
     private long currentUpdateTime;
 
     private Score score;
+    private SoundEffect soundEffect;
     private GameBoard gameboard;
     private Pane pane;
     private final StartHandler startHandler;
@@ -36,6 +38,7 @@ public class GameEngine {
 
     public GameEngine() {
         score = new Score();
+        soundEffect = new SoundEffect();
         gameboard = new GameBoard(score);
         lastUpdateTime = 0;
         gameStatus = GameStatus.GAMESTART;
@@ -85,6 +88,13 @@ public class GameEngine {
      */
     public void setScene(Pane pane) {
         this.pane = pane;
+    }
+
+    /**
+     * @return the soundEffect
+     */
+    public SoundEffect getSoundEffect() {
+        return soundEffect;
     }
 
     public void endGame() {

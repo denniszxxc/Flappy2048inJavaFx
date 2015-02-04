@@ -27,6 +27,7 @@ class JumpHandler implements EventHandler<InputEvent> {
     @Override
     public void handle(InputEvent event) {
         gameEngine.getGameboard().getGraphicalObjCollector().getBird().jump();
+        gameEngine.getSoundEffect().playJumpSound();
     }
 
 }
