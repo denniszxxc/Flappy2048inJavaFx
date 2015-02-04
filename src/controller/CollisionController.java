@@ -17,7 +17,7 @@ import model.Score;
  */
 class CollisionController {
 
-    private static final double collisionToleranceX = -5;
+    private static final double collisionToleranceX = -4;
     private static final double collisionToleranceY = 40.0;
 
     private Bird bird;
@@ -25,6 +25,7 @@ class CollisionController {
     private int canvasHeight;
     private boolean hitWrongBox;
     private Score score;
+    private boolean firstCollide;
 
     CollisionController() {
     }
@@ -35,6 +36,8 @@ class CollisionController {
         this.canvasHeight = canvasHeight;
         hitWrongBox = false;
         this.score = score;
+        
+        firstCollide = false;
     }
 
     public boolean birdHitBottom() {
@@ -42,45 +45,38 @@ class CollisionController {
     }
 
     public void birdPillarCollisonCheck() {
-        if (birdRightHitPillar()) {
-            Box highBox = pillarCollector.getLeftmostPillar().getBox(bird.getY()
-                    + collisionToleranceY);
-            Box lowBox = pillarCollector.getLeftmostPillar().getBox(bird.getY()
-                    + Bird.BIRD_HEIGHT - collisionToleranceY);
-            System.out.print(bird.getY() + collisionToleranceY);
-            System.out.print("\t");
-            System.out.println(highBox.getBoxValue());
+        if(birdInsidetPillar()) {
+            if (firstCollide) {
+                firstCollide = false;
+                
+                Box highBox = pillarCollector.getLeftmostPillar().getBox(bird.getY()
+                        + collisionToleranceY);
+                Box lowBox = pillarCollector.getLeftmostPillar().getBox(bird.getY()
+                        + Bird.BIRD_HEIGHT - collisionToleranceY);
 
-            System.out.print(bird.getY()
-                    + Bird.BIRD_HEIGHT - collisionToleranceY);
-            System.out.print("\t");
-            System.out.println(lowBox.getBoxValue());
-            if (highBox != lowBox || highBox == null) {
-                hitWrongBox = true;
-            } else if (highBox.getBoxValue() != bird.getBirdValue()) {
-                hitWrongBox = true;
+                if (highBox != lowBox || highBox == null) {
+                    hitWrongBox = true;
+                } else if (highBox.getBoxValue() != bird.getBirdValue()) {
+                    hitWrongBox = true;
+                } else {
+                    bird.setBirdValue(bird.getBirdValue() * 2);
+                    pillarCollector.setNewPillarBoxMinimunValue(bird.getBirdValue());
+                    score.setCurrentScore(score.getCurrentScore() + bird.getBirdValue());
+                    bird.enterBoxGap(highBox.getY());
+                }
             } else {
-                bird.setBirdValue(bird.getBirdValue() * 2);
-                pillarCollector.setNewPillarBoxMinimunValue(bird.getBirdValue());
-                score.setCurrentScore(score.getCurrentScore() + bird.getBirdValue());
-                bird.enterBoxGap(highBox.getY());
+                bird.enterBoxGap(bird.getY());
             }
-        } 
-    }
-
-    public boolean birdRightHitPillar() {
-        double leftmostPillarPositionX = pillarCollector.getLeftmostPillar().getX();
-        double BirdPillarDistance = leftmostPillarPositionX - 
-                (bird.getX() + Bird.BIRD_WiDTH);
-        
-        return BirdPillarDistance < 0 && BirdPillarDistance > collisionToleranceX;
+        } else {
+            firstCollide = true;
+        }
     }
 
     public boolean birdInsidetPillar() {
         double leftmostPillarPositionX = pillarCollector.getLeftmostPillar().getX();
         double birdRightEdgeX = bird.getX() + Bird.BIRD_WiDTH;
         return birdRightEdgeX > leftmostPillarPositionX
-                && leftmostPillarPositionX < leftmostPillarPositionX + Box.BOX_DIMENTION;
+                && bird.getX() < leftmostPillarPositionX + Box.BOX_DIMENTION;
     }
     
     /**
