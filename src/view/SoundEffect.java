@@ -18,9 +18,9 @@ public class SoundEffect {
     private AudioClip hitCorrectBoxSoundEffect;
     
     public SoundEffect(){
-        jumpSoundEffect = new AudioClip(getClass().getResource("/soundEffect/jump.wav").toString());
-        hitWallSoundEffect = new AudioClip(getClass().getResource("/soundEffect/hit.wav").toString());
-        hitCorrectBoxSoundEffect = new AudioClip(getClass().getResource("/soundEffect/bingo.wav").toString());
+        jumpSoundEffect = new AudioClip(getClass().getResource("jump.wav").toString());
+        hitWallSoundEffect = new AudioClip(getClass().getResource("hit.wav").toString());
+        hitCorrectBoxSoundEffect = new AudioClip(getClass().getResource("bingo.wav").toString());
         
         jumpSoundEffect.setCycleCount(1);
         hitWallSoundEffect.setCycleCount(1);
