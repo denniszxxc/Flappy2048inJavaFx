@@ -13,9 +13,10 @@ public class Box extends GraphicalObjs {
 
     public static final int BOX_DIMENTION = 100;
     /**
-     * the Value on a box
+     * the Power Value on a box. 
+     * Eg val 3 mean box display 8
      */
-    private int boxValue;
+    private int boxPowerValue;
     /**
      * the font size of text on box
      */
@@ -26,21 +27,21 @@ public class Box extends GraphicalObjs {
     }
 
     Box(int boxValue) {
-        this.boxValue = boxValue;
+        this.boxPowerValue = boxValue;
     }
 
     /**
-     * @return the boxValue
+     * @return the boxPowerValue
      */
     public int getBoxValue() {
-        return boxValue;
+        return boxPowerValue;
     }
 
     /**
-     * @param boxValue the boxValue to set
+     * @param boxValue the boxPowerValue to set
      */
     public void setBoxValue(int boxValue) {
-        this.boxValue = boxValue;
+        this.boxPowerValue = boxValue;
     }
 
     /**

@@ -22,7 +22,7 @@ public class GameEngine {
         GAMESTART, GAMEPLAY, GAMEEND
     };
 
-    public final int REFRESH_INTERVAL = 20;
+    public final int REFRESH_INTERVAL = 10;
     private long lastUpdateTime;
     private long currentUpdateTime;
 

@@ -59,11 +59,11 @@ class CollisionController {
 
                 if (highBox != lowBox) {
                     hitWrongBox = true;
-                } else if (highBox.getBoxValue() != bird.getBirdValue()) {
+                } else if (highBox.getBoxValue() != bird.getBirdPowerValue()) {
                     hitWrongBox = true;
                 } else {
-                    bird.setBirdValue(bird.getBirdValue() * 2);
-                    pillarCollector.setNewPillarBoxMinimunValue(bird.getBirdValue());
+                    bird.setBirdPowerValue(bird.getBirdPowerValue() + 1);
+                    pillarCollector.setNewPillarBoxMinimunValue(bird.getBirdPowerValue());
                     score.setCurrentScore(score.getCurrentScore() + 1);
                     bird.enterBoxGap(highBox.getY());
                     soundEffect.playHitCorrectBoxSound();

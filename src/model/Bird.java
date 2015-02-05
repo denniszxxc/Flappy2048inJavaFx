@@ -18,15 +18,13 @@ public class Bird extends GraphicalObjs {
     private static final double BIRD_INIT_Y = 200;
     private static final double BIRD_INIT_VELOCITY_X = 0;
     private static final double BIRD_INIT_VELOCITY_Y = 0;
-    //private static final double BIRD_GRAVITY = 0.0002;
-    //private static final double BIRD_JUMP_SPEED = -0.15;
     private static final double BIRD_GRAVITY = 0.0004;
     private static final double BIRD_JUMP_SPEED = -0.25;
 
     /**
-     * The value of the bird, eg. 2,4,8...
+     * The power value of the bird, 3 mean 2 power 3 = 8
      */
-    private int birdValue;
+    private int birdPowerValue;
 
     /**
      * state the bird is jumping
@@ -44,23 +42,23 @@ public class Bird extends GraphicalObjs {
         super.setVelocityX(BIRD_INIT_VELOCITY_X);
         super.setVelocityY(BIRD_INIT_VELOCITY_Y);
         
-        birdValue = 2;
+        birdPowerValue = 2;
         jumping = false;
         insideBoxGap = false;
     }
 
     /**
-     * @return the birdValue
+     * @return the birdPowerValue
      */
-    public int getBirdValue() {
-        return birdValue;
+    public int getBirdPowerValue() {
+        return birdPowerValue;
     }
 
     /**
-     * @param birdValue the birdValue to set
+     * @param birdPowerValue the birdPowerValue to set
      */
-    public void setBirdValue(int birdValue) {
-        this.birdValue = birdValue;
+    public void setBirdPowerValue(int birdPowerValue) {
+        this.birdPowerValue = birdPowerValue;
     }
 
     /**

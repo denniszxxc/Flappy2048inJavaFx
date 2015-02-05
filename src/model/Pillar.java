@@ -85,8 +85,8 @@ public class Pillar extends GraphicalObjs {
      */
     private int[] generateBoxValList(int boxMinValue) {
         int[] valList = new int[BOX_NUMBER];
-        for (int i = 0 ; i < BOX_NUMBER; i++) {
-            valList[i] = boxMinValue * (int) Math.pow(2, i) ;
+        for (int i = 0, j = boxMinValue ; i < BOX_NUMBER; i++, j++) {
+            valList[i] = j;
         }
 
         for (int i = 0; i < BOX_NUMBER; i++) {
@@ -97,7 +97,7 @@ public class Pillar extends GraphicalObjs {
             valList[target] = temp;
         }
 
-        return valList;
+         return valList;
     }
 
     /**

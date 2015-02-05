@@ -6,9 +6,12 @@
 package flappy2048injavafx;
 
 import controller.GameEngine;
+import java.util.Timer;
+import java.util.TimerTask;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -40,7 +43,7 @@ public class Flappy2048InJavaFx extends Application {
             scene.setRoot(gameEngine.getPane());
             primaryStage.show();
         };
-
+        
         Timeline animation = new Timeline(
                 new KeyFrame(Duration.millis(gameEngine.REFRESH_INTERVAL), eventHandler));
         animation.setCycleCount(Timeline.INDEFINITE);
