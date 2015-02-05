@@ -209,7 +209,13 @@ public class GameBoard {
         gc.setFill(Color.BLACK);
         gc.setFont(new Font(30));
         
-        gc.fillText(Integer.toString((int) Math.pow(2, boxPowVal)),
+        String boxMessage;
+        if (boxPowVal < 14) {
+            boxMessage = Integer.toString((int) Math.pow(2, boxPowVal));
+        } else {
+            boxMessage = "2^" + Integer.toString(boxPowVal);
+        }
+        gc.fillText(boxMessage,
                 xPoisition + Box.BOX_DIMENTION / 2, yPoisition + Box.BOX_DIMENTION / 2);
     }
 
