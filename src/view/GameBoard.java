@@ -99,13 +99,13 @@ public class GameBoard {
     public Pane endScreen(EventHandler restartHandler, EventHandler endHandler) {
         canvas = null;
 
-        Button btn = new Button();
-        btn.setId("restartBtn");
-        btn.setOnAction(restartHandler);
+        Button restartBtn = new Button();
+        restartBtn.setId("restartBtn");
+        restartBtn.setOnAction(restartHandler);
 
-        Button endBtn = new Button();
-        endBtn.setOnAction(endHandler);
-        endBtn.setText("Exit");
+        Button quitBtn = new Button();
+        quitBtn.setId("quitBtn");
+        quitBtn.setOnAction(endHandler);
 
         Text txt = new Text();
         txt.setId("scoreTableText");
@@ -119,12 +119,11 @@ public class GameBoard {
         Pane endPane = new Pane();
         endPane.setId("endPane");
         endPane.getStylesheets().addAll(this.getClass().getResource("endScreen.css").toExternalForm());
-        endPane.getChildren().addAll(spane, endBtn, btn);
-        btn.setPrefSize(200f, 68f);
-        btn.relocate(300, 500);
-
-        endBtn.setPrefSize(200f, 68f);
-        endBtn.relocate(300, 300);
+        endPane.getChildren().addAll(spane, restartBtn, quitBtn);
+        restartBtn.setPrefSize(200f, 68f);
+        restartBtn.relocate(150, 500);
+        quitBtn.setPrefSize(200f, 68f);
+        quitBtn.relocate(450, 500);
 
         spane.setPrefSize(200f, 68f);
         spane.relocate(300, 200);
@@ -216,7 +215,7 @@ public class GameBoard {
         gc.setFont(new Font("Arial Bold", Box.fontSize(boxPowVal)));
 
         String boxMessage;
-        if (boxPowVal < 16) {
+        if (boxPowVal <= 16) {
             boxMessage = Integer.toString((int) Math.pow(2, boxPowVal));
         } else {
             boxMessage = "2^" + Integer.toString(boxPowVal);
