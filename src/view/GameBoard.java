@@ -96,17 +96,20 @@ public class GameBoard {
      * @param restartHandler restart button on action handler
      * @return root pane with graphic elements
      */
-    public Pane endScreen(EventHandler restartHandler) {
-        System.out.println("END GAME");
+    public Pane endScreen(EventHandler restartHandler, EventHandler endHandler) {
         canvas = null;
 
         Button btn = new Button();
         btn.setId("restartBtn");
         btn.setOnAction(restartHandler);
 
+        Button endBtn = new Button();
+        endBtn.setOnAction(endHandler);
+        endBtn.setText("Exit");
+
         Text txt = new Text();
         txt.setId("scoreTableText");
-        txt.setText("Score: " + score.getCurrentScore()  + "\n" 
+        txt.setText("Score: " + score.getCurrentScore() + "\n"
                 + "Best: " + score.getHighestScore());
 
         StackPane spane = new StackPane();
@@ -116,10 +119,13 @@ public class GameBoard {
         Pane endPane = new Pane();
         endPane.setId("endPane");
         endPane.getStylesheets().addAll(this.getClass().getResource("endScreen.css").toExternalForm());
-        endPane.getChildren().addAll(spane, btn);
+        endPane.getChildren().addAll(spane, endBtn, btn);
         btn.setPrefSize(200f, 68f);
         btn.relocate(300, 500);
-        
+
+        endBtn.setPrefSize(200f, 68f);
+        endBtn.relocate(300, 300);
+
         spane.setPrefSize(200f, 68f);
         spane.relocate(300, 200);
 
@@ -200,15 +206,15 @@ public class GameBoard {
         gc.setStroke(Color.GRAY);
         gc.setLineWidth(10);
         gc.setLineJoin(StrokeLineJoin.ROUND);
-        
+
         gc.fillRect(xPoisition, yPoisition, Box.BOX_DIMENTION, Box.BOX_DIMENTION);
         gc.strokeRect(xPoisition, yPoisition, Box.BOX_DIMENTION, Box.BOX_DIMENTION);
-        
+
         gc.setTextAlign(TextAlignment.CENTER);
         gc.setTextBaseline(VPos.CENTER);
         gc.setFill(Color.BLACK);
         gc.setFont(new Font(30));
-        
+
         String boxMessage;
         if (boxPowVal < 14) {
             boxMessage = Integer.toString((int) Math.pow(2, boxPowVal));
@@ -219,19 +225,18 @@ public class GameBoard {
                 xPoisition + Box.BOX_DIMENTION / 2, yPoisition + Box.BOX_DIMENTION / 2);
     }
 
-    
     public void drawScore(GraphicsContext gc) {
         gc.setFill(Color.web("#8f7a66"));
-        gc.fillRoundRect(700,20,80,50,10,10);
-        
+        gc.fillRoundRect(700, 20, 80, 50, 10, 10);
+
         gc.setTextAlign(TextAlignment.CENTER);
         gc.setTextBaseline(VPos.TOP);
         gc.setFill(Color.web("#f9f6f2"));
-        gc.setFont(new Font("Arial Bold",13));
-        gc.fillText("SCORE", canvas.getWidth()-60, 23);
-        gc.setFont(new Font("Arial Bold",24));
+        gc.setFont(new Font("Arial Bold", 13));
+        gc.fillText("SCORE", canvas.getWidth() - 60, 23);
+        gc.setFont(new Font("Arial Bold", 24));
         gc.fillText(Integer.toString(score.getCurrentScore()),
-                canvas.getWidth()-60, 38, 60);
-        
+                canvas.getWidth() - 60, 38, 60);
+
     }
 }

@@ -32,6 +32,7 @@ public class GameEngine {
     private Pane pane;
     private final StartHandler startHandler;
     private final JumpHandler jumpHandler;
+    private final EndHandler endHandler;
     private CollisionController collisionController;
     
     private GameStatus gameStatus;
@@ -44,6 +45,7 @@ public class GameEngine {
         gameStatus = GameStatus.GAMESTART;
         startHandler = new StartHandler(this);
         jumpHandler = new JumpHandler(this);
+        endHandler = new EndHandler(this);
         
         pane = gameboard.startScreen(startHandler);
     }
@@ -100,7 +102,7 @@ public class GameEngine {
     public void endGame() {
         gameStatus = GameStatus.GAMEEND;
         score.updateHighscore();
-        pane = gameboard.endScreen(startHandler);
+        pane = gameboard.endScreen(startHandler, endHandler);
     }
 
     public void startGame() {
@@ -121,7 +123,7 @@ public class GameEngine {
         lastUpdateTime = currentUpdateTime;
         currentUpdateTime = newUpdateTime;
         long durationInMs = TimeUnit.NANOSECONDS.toMillis(currentUpdateTime - lastUpdateTime);
-        System.out.println(durationInMs);
+        
         if (gameStatus == GameStatus.GAMEPLAY) {
             gameboard.getGraphicalObjCollector().updateAll(durationInMs);
             pane = gameboard.drawGamePlay(pane);

@@ -6,12 +6,9 @@
 package flappy2048injavafx;
 
 import controller.GameEngine;
-import java.util.Timer;
-import java.util.TimerTask;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -32,7 +29,8 @@ public class Flappy2048InJavaFx extends Application {
     public void start(Stage primaryStage) {
         gameEngine = new GameEngine();
         Scene scene = new Scene(gameEngine.getPane(),
-                gameEngine.getGameboard().CANVAS_WIDTH, gameEngine.getGameboard().CANVAS_HEIGHT);
+                gameEngine.getGameboard().CANVAS_WIDTH,
+                gameEngine.getGameboard().CANVAS_HEIGHT);
         primaryStage.setTitle("Flappy2048 in JavaFx!");
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
@@ -40,17 +38,22 @@ public class Flappy2048InJavaFx extends Application {
         // Create a handler for refreshing
         EventHandler<ActionEvent> eventHandler = e -> {
             gameEngine.update(System.nanoTime());
+            
+            if(gameEngine.getPane() == null){
+                primaryStage.close();
+                return;
+            }
             scene.setRoot(gameEngine.getPane());
             primaryStage.show();
         };
-        
+
         Timeline animation = new Timeline(
                 new KeyFrame(Duration.millis(gameEngine.REFRESH_INTERVAL), eventHandler));
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play();
 
     }
-    
+
     /**
      * @param args the command line arguments
      */

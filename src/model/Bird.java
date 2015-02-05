@@ -87,7 +87,6 @@ public class Bird extends GraphicalObjs {
      */
     public void jump() {
         jumping = true;
-        System.out.println("Jump!");
     }
 
     /**

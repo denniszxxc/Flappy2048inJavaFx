@@ -12,21 +12,20 @@ import javafx.event.EventHandler;
  *
  * @author dennisli
  */
-class StartHandler implements EventHandler<ActionEvent> {
+class EndHandler implements EventHandler<ActionEvent> {
 
     private GameEngine gameEngine;
 
-    public StartHandler() {
+    public EndHandler() {
 
     }
 
-    public StartHandler(GameEngine gameEngine) {
+    public EndHandler(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
     }
 
     @Override
     public void handle(ActionEvent event) {
-        gameEngine.startGame();
+        gameEngine.setScene(null);
     }
-
 }
