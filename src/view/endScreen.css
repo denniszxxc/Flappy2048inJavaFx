@@ -6,3 +6,15 @@
 	-fx-background-image: url("restartBtn.png");
 	-fx-background-insets: 0;
 }
+
+#scoreTable {
+    -fx-background-color: #8f7a66;
+	-fx-background-radius: 10px;
+    -fx-padding: 15;
+    -fx-spacing: 10;
+}
+
+#scoreTableText {
+	-fx-font: 36px "Open Sans";
+	-fx-fill: #f9f6f2;
+}

@@ -114,11 +114,11 @@ public class GameBoard {
         for(int score: score.getHighScore()){
             str+= Integer.toString(score) + "\n ";
         }
-        
+        txt.setId("scoreTableText");
         txt.setText(str);
         
         VBox vbox = new VBox();
-        
+        vbox.setId("scoreTable");
         vbox.getChildren().add(txt);
         
         Pane endPane = new Pane();
@@ -126,7 +126,7 @@ public class GameBoard {
         endPane.getStylesheets().addAll(this.getClass().getResource("endScreen.css").toExternalForm());
         endPane.getChildren().addAll(vbox, btn);
         btn.setPrefSize(200f, 68f);
-        btn.relocate(300,480);
+        btn.relocate(300,500);
         
 
         StackPane root = new StackPane();
