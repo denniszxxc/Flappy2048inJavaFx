@@ -202,7 +202,7 @@ public class GameBoard {
     }
 
     private void drawABox(GraphicsContext gc, double xPoisition, double yPoisition, int boxPowVal) {
-        gc.setFill(Box.getBoxColor(boxPowVal));
+        gc.setFill(Box.boxColor(boxPowVal));
         gc.setStroke(Color.GRAY);
         gc.setLineWidth(10);
         gc.setLineJoin(StrokeLineJoin.ROUND);
@@ -212,11 +212,11 @@ public class GameBoard {
 
         gc.setTextAlign(TextAlignment.CENTER);
         gc.setTextBaseline(VPos.CENTER);
-        gc.setFill(Color.BLACK);
-        gc.setFont(new Font(30));
+        gc.setFill(Box.fontColor(boxPowVal));
+        gc.setFont(new Font("Arial Bold", Box.fontSize(boxPowVal)));
 
         String boxMessage;
-        if (boxPowVal < 14) {
+        if (boxPowVal < 16) {
             boxMessage = Integer.toString((int) Math.pow(2, boxPowVal));
         } else {
             boxMessage = "2^" + Integer.toString(boxPowVal);

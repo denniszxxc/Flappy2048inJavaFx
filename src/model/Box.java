@@ -46,28 +46,50 @@ public class Box extends GraphicalObjs {
         this.boxPowerValue = boxValue;
     }
 
-    /**
-     * @return the fontSize
-     */
-    public int getFontSize() {
-        return fontSize;
+    public static int fontSize(int boxPowerValue) {
+        switch(boxPowerValue) {
+            case 1:
+            case 2:
+            case 3:
+                return 56;
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+                return 30;
+            default:
+                return 42;
+                
+        }
     }
 
-    /**
-     * @param fontSize the fontSize to set
-     */
-    public void setFontSize(int fontSize) {
-        this.fontSize = fontSize;
-    }
-
-    public static Color getBoxColor(int boxPowerValue) {
+    public static Color boxColor(int boxPowerValue) {
         switch (boxPowerValue) {
-            case 1 : return Color.BLUE;
-            case 2 : return Color.RED;
-            case 3 : return Color.YELLOW;
-            default: return Color.rgb( 222,184,135); 
+            case 1: return Color.rgb(234,232,228);
+            case 2: return Color.rgb(252,238,215);
+            case 3: return Color.rgb(242,177,121);
+            case 4: return Color.rgb(245,149,99);
+            case 5: return Color.rgb(246,124,95);
+            case 6: return Color.rgb(254,109,74);
+            case 7: return Color.rgb(231,202,111);
+            case 8: return Color.rgb(237,204,97);
+            case 9: return Color.rgb(237,200,80);
+            case 10: return Color.rgb(237,220,80);
+            case 11: return Color.rgb(237,197,63);
+            default: return Color.rgb(60,58,50); 
         }
     
+    }
+    
+    public static Color fontColor(int boxPowerValue) {
+        switch (boxPowerValue) {
+            case 1:
+            case 2:
+                return Color.rgb(96,96,96);
+            default: return Color.rgb(249,246,242);
+        }
     }
     
     @Override
