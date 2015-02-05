@@ -14,14 +14,12 @@
     -fx-background-radius: 10px;
 }
 
-#scoreTable {
-    -fx-background-color: #8f7a66;
-    -fx-background-radius: 10px;
-    -fx-padding: 15;
-    -fx-spacing: 10;
+#score {
+    -fx-font: 128px "Arial Bold";
+    -fx-fill: #ffffff;
 }
 
-#scoreTableText {
-    -fx-font: 36px "Arial Bold";
-    -fx-fill: #f9f6f2;
+#highScore1, #highScore2, #highScore3 {
+    -fx-font: 68px "Arial Bold";
+    -fx-fill: #ffffff;
 }

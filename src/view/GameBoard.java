@@ -64,8 +64,8 @@ public class GameBoard {
      * @parm startHandler Handler for Start Button
      */
     public Pane startScreen(EventHandler<ActionEvent> startHandler) {
-        ImageView gameTitle = new ImageView(new Image("view/title.png"));
-        ImageView bird = new ImageView(new Image("view/startBird.png"));
+        ImageView gameTitle = new ImageView(new Image("view/startScreenMessage.png"));
+        ImageView bird = new ImageView(new Image("view/startScreenBird.png"));
 
         TranslateTransition birdTransition = new TranslateTransition(Duration.millis(1000), bird);
         birdTransition.setByY(50f);
@@ -99,6 +99,8 @@ public class GameBoard {
     public Pane endScreen(EventHandler restartHandler, EventHandler endHandler) {
         canvas = null;
 
+        ImageView endScreenImage = new ImageView(new Image("view/endScreenMessage.png"));
+        
         Button restartBtn = new Button();
         restartBtn.setId("restartBtn");
         restartBtn.setOnAction(restartHandler);
@@ -107,26 +109,57 @@ public class GameBoard {
         quitBtn.setId("quitBtn");
         quitBtn.setOnAction(endHandler);
 
-        Text txt = new Text();
-        txt.setId("scoreTableText");
-        txt.setText("Score: " + score.getCurrentScore() + "\n"
-                + "Best: " + score.getHighestScore());
-
-        StackPane spane = new StackPane();
-        spane.setId("scoreTable");
-        spane.getChildren().add(txt);
+        Text scoreText = new Text();
+        scoreText.setTextAlignment(TextAlignment.CENTER);
+        scoreText.setId("score");
+        scoreText.setText("" + score.getCurrentScore());
+        StackPane scorePane = new StackPane();
+        scorePane.getChildren().add(scoreText);
+        scorePane.setPrefSize(200f, 100f);
+        scorePane.relocate(300, 175);
+        
+        Text highScoreText1 = new Text();
+        highScoreText1.setTextAlignment(TextAlignment.CENTER);
+        highScoreText1.setId("highScore1");
+        highScoreText1.setText("" + score.getHighestScore());
+        StackPane highScorePane1 = new StackPane();
+        highScorePane1.getChildren().add(highScoreText1);
+        highScorePane1.setPrefSize(200f, 100f);
+        highScorePane1.relocate(50, 375);
+        
+        Text highScoreText2 = new Text();
+        highScoreText2.setTextAlignment(TextAlignment.CENTER);
+        highScoreText2.setId("highScore2");
+        highScoreText2.setText("??");
+        StackPane highScorePane2 = new StackPane();
+        highScorePane2.getChildren().add(highScoreText2);
+        highScorePane2.setPrefSize(200f, 100f);
+        highScorePane2.relocate(300, 375);
+        
+        Text highScoreText3 = new Text();
+        highScoreText3.setTextAlignment(TextAlignment.CENTER);
+        highScoreText3.setId("highScore3");
+        highScoreText3.setText("?");
+        StackPane highScorePane3 = new StackPane();
+        highScorePane3.getChildren().add(highScoreText3);
+        highScorePane3.setPrefSize(200f, 100f);
+        highScorePane3.relocate(550, 375);
 
         Pane endPane = new Pane();
         endPane.setId("endPane");
         endPane.getStylesheets().addAll(this.getClass().getResource("endScreen.css").toExternalForm());
-        endPane.getChildren().addAll(spane, restartBtn, quitBtn);
+        endPane.getChildren().addAll(
+                endScreenImage,
+                scorePane,
+                highScorePane1,
+                highScorePane2,
+                highScorePane3,
+                restartBtn,
+                quitBtn);
         restartBtn.setPrefSize(200f, 68f);
         restartBtn.relocate(150, 500);
         quitBtn.setPrefSize(200f, 68f);
         quitBtn.relocate(450, 500);
-
-        spane.setPrefSize(200f, 68f);
-        spane.relocate(300, 200);
 
         StackPane root = new StackPane();
         root.getChildren().addAll(endPane);
