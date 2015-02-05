@@ -1,0 +1,8 @@
+#endPane{
+	-fx-background-image: url("bg.png");
+}
+
+#restartBtn {
+	-fx-background-image: url("restartBtn.png");
+	-fx-background-insets: 0;
+}

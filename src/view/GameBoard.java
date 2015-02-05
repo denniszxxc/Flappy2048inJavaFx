@@ -72,13 +72,11 @@ public class GameBoard {
         ImageView gameTitle = new ImageView(new Image("view/title.png"));
         ImageView bird = new ImageView(new Image("view/startBird.png"));
         
-        TranslateTransition tt = new TranslateTransition();
-        tt.setDuration(Duration.millis(1000));
-        tt.setNode(bird);
-        tt.setByY(50f);
-        tt.setCycleCount(Timeline.INDEFINITE);
-        tt.setAutoReverse(true);
-        tt.play();
+        TranslateTransition birdTransition = new TranslateTransition(Duration.millis(1000), bird);
+        birdTransition.setByY(50f);
+        birdTransition.setCycleCount(Timeline.INDEFINITE);
+        birdTransition.setAutoReverse(true);
+        birdTransition.play();
 
         Button btn = new Button();
         btn.setId("startBtn");
@@ -86,7 +84,7 @@ public class GameBoard {
         
         Pane startPane = new Pane();
         startPane.setId("startPane");
-        startPane.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        startPane.getStylesheets().addAll(this.getClass().getResource("startScreen.css").toExternalForm());
         startPane.getChildren().addAll(gameTitle, bird, btn);
         btn.setPrefSize(200f, 68f);
         btn.relocate(300,480);
@@ -108,7 +106,7 @@ public class GameBoard {
         canvas = null;
         
         Button btn = new Button();
-        btn.setText("Restart");
+        btn.setId("restartBtn");
         btn.setOnAction(restartHandler);
 
         Text txt = new Text();
@@ -122,10 +120,17 @@ public class GameBoard {
         VBox vbox = new VBox();
         
         vbox.getChildren().add(txt);
-        vbox.getChildren().add(btn);
+        
+        Pane endPane = new Pane();
+        endPane.setId("endPane");
+        endPane.getStylesheets().addAll(this.getClass().getResource("endScreen.css").toExternalForm());
+        endPane.getChildren().addAll(vbox, btn);
+        btn.setPrefSize(200f, 68f);
+        btn.relocate(300,480);
+        
 
         StackPane root = new StackPane();
-        root.getChildren().add(vbox);
+        root.getChildren().addAll(endPane);
         return root;
     }
 

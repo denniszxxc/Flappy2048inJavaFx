@@ -4,6 +4,5 @@
 
 #startBtn {
 	-fx-background-image: url("startBtn.png");
-	-fx-background-radius: 12px;
 	-fx-background-insets: 0;
 }
