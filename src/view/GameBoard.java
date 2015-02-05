@@ -105,23 +105,23 @@ public class GameBoard {
         btn.setOnAction(restartHandler);
 
         Text txt = new Text();
-        String str = "";
-        for (int score : score.getHighScore()) {
-            str += Integer.toString(score) + "\n";
-        }
         txt.setId("scoreTableText");
-        txt.setText(str);
+        txt.setText("Score: " + score.getCurrentScore()  + "\n" 
+                + "Best: " + score.getHighestScore());
 
-        VBox vbox = new VBox();
-        vbox.setId("scoreTable");
-        vbox.getChildren().add(txt);
+        StackPane spane = new StackPane();
+        spane.setId("scoreTable");
+        spane.getChildren().add(txt);
 
         Pane endPane = new Pane();
         endPane.setId("endPane");
         endPane.getStylesheets().addAll(this.getClass().getResource("endScreen.css").toExternalForm());
-        endPane.getChildren().addAll(vbox, btn);
+        endPane.getChildren().addAll(spane, btn);
         btn.setPrefSize(200f, 68f);
         btn.relocate(300, 500);
+        
+        spane.setPrefSize(200f, 68f);
+        spane.relocate(300, 200);
 
         StackPane root = new StackPane();
         root.getChildren().addAll(endPane);

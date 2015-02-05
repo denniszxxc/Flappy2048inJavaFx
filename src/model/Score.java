@@ -16,11 +16,11 @@ import java.util.Collections;
 public class Score {
 
     private int currentScore;
-    private ArrayList<Integer> highScore;
+    private int highestScore;
 
     public Score(){
         currentScore = 0;
-        highScore = new ArrayList<Integer>();
+        highestScore = 0;
     }
     
     /**
@@ -38,18 +38,18 @@ public class Score {
     }
 
     /**
-     * @return the highScore
+     * @return the highestScore
      */
-    public ArrayList<Integer> getHighScore() {
-        return highScore;
+    public int getHighestScore() {
+        return highestScore;
     }
     
     /**
-     * Insert currentScore into a sorted highScore Lists
+     * Insert currentScore into a sorted highestScore Lists
      */
     public void updateHighscore(){
-        
-        highScore.add(currentScore);
-        Collections.sort(highScore);
+        if(currentScore > highestScore ){
+            highestScore =  currentScore ;
+        }
     }
 }
