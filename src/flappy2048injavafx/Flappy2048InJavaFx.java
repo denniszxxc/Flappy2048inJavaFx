@@ -32,6 +32,7 @@ public class Flappy2048InJavaFx extends Application {
                 gameEngine.getGameboard().CANVAS_WIDTH, gameEngine.getGameboard().CANVAS_HEIGHT);
         primaryStage.setTitle("Flappy2048 in JavaFx!");
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
 
         // Create a handler for refreshing
         EventHandler<ActionEvent> eventHandler = e -> {

@@ -64,9 +64,10 @@ class CollisionController {
                 } else {
                     bird.setBirdValue(bird.getBirdValue() * 2);
                     pillarCollector.setNewPillarBoxMinimunValue(bird.getBirdValue());
-                    score.setCurrentScore(score.getCurrentScore() + bird.getBirdValue());
+                    score.setCurrentScore(score.getCurrentScore() + 1);
                     bird.enterBoxGap(highBox.getY());
                     soundEffect.playHitCorrectBoxSound();
+                    highBox.setBoxValue(-1);
                 }
             } else {
                 bird.enterBoxGap(bird.getY());

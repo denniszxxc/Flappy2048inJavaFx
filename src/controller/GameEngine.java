@@ -22,7 +22,7 @@ public class GameEngine {
         GAMESTART, GAMEPLAY, GAMEEND
     };
 
-    public final int REFRESH_INTERVAL = 25;
+    public final int REFRESH_INTERVAL = 20;
     private long lastUpdateTime;
     private long currentUpdateTime;
 
@@ -121,7 +121,7 @@ public class GameEngine {
         lastUpdateTime = currentUpdateTime;
         currentUpdateTime = newUpdateTime;
         long durationInMs = TimeUnit.NANOSECONDS.toMillis(currentUpdateTime - lastUpdateTime);
-        
+        System.out.println(durationInMs);
         if (gameStatus == GameStatus.GAMEPLAY) {
             gameboard.getGraphicalObjCollector().updateAll(durationInMs);
             pane = gameboard.drawGamePlay(pane);

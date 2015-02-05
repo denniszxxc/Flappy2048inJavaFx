@@ -49,7 +49,8 @@ public class GameBoard {
     private Canvas canvas;
     private GraphicalObjCollector graphicalObjCollector;
     private Score score;
-
+    
+    
     public GameBoard() {
         graphicalObjCollector = new GraphicalObjCollector();
     }
@@ -141,10 +142,12 @@ public class GameBoard {
         
         canvas.setOnMouseClicked(jumpHandler);
         canvas.setOnKeyPressed(jumpHandler);
-
+        
         StackPane root = new StackPane();
         root.getChildren().add(canvas);
         root.setOnKeyPressed(jumpHandler);
+        root.getStylesheets().add(this.getClass().getResource("game.css").toExternalForm());
+        root.setId("mainPane");
             
         graphicalObjCollector = new GraphicalObjCollector();
         
@@ -161,11 +164,22 @@ public class GameBoard {
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
-        drawBackGround(gc);
+        
+        //drawBackGround(gc);
+        
         drawPillars(gc);
         drawBird(gc);
         drawScore(gc);
+        
+        /* root.getChildren().removeAll();
+        Text displayScore = new Text();
+        displayScore.setText("Score\n" + score.getCurrentScore());
+        displayScore.setId("displayScore");
+        Pane displayScorePane = new Pane();
+        displayScorePane.getChildren().add(displayScore);
+        displayScore.relocate(720, 20);
+        root.getChildren().addAll(displayScorePane);
+        canvas.toFront(); */
         
         return root;
     }
@@ -202,6 +216,9 @@ public class GameBoard {
     public void drawBoxes(GraphicsContext gc, Pillar pillar) {
         Box[] boxes = pillar.getBoxes();
         for (Box box : boxes) {
+            if(box.getBoxValue() == -1){
+                continue;
+            }
             double xPoisition = box.getX();
             double yPoisition = box.getY();
 
@@ -229,14 +246,18 @@ public class GameBoard {
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
     
-    public void drawScore(GraphicsContext gc){
-        gc.setTextAlign(TextAlignment.RIGHT);
+    public void drawScore(GraphicsContext gc) {
+        gc.setFill(Color.web("#8f7a66"));
+        gc.fillRoundRect(700,20,80,50,10,10);
+        
+        gc.setTextAlign(TextAlignment.CENTER);
         gc.setTextBaseline(VPos.TOP);
-        gc.setFill(Color.BLACK);
-        gc.setFont(new Font("Arial Bold",32));
-
-        gc.fillText("Score: " + Integer.toString(score.getCurrentScore()),
-                canvas.getWidth(), 0);
-
+        gc.setFill(Color.web("#f9f6f2"));
+        gc.setFont(new Font("Arial Bold",13));
+        gc.fillText("SCORE", canvas.getWidth()-60, 23);
+        gc.setFont(new Font("Arial Bold",24));
+        gc.fillText(Integer.toString(score.getCurrentScore()),
+                canvas.getWidth()-60, 38, 60);
+        
     }
 }
