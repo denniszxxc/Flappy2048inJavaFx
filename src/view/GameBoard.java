@@ -6,20 +6,30 @@
 package view;
 
 import java.util.ArrayList;
+import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.CubicCurveTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
 import model.Bird;
 import model.GraphicalObjCollector;
 import model.Pillar;
@@ -59,12 +69,30 @@ public class GameBoard {
      * @parm startHandler Handler for Start Button
      */
     public Pane startScreen(EventHandler<ActionEvent> startHandler) {
+        ImageView gameTitle = new ImageView(new Image("view/title.png"));
+        ImageView bird = new ImageView(new Image("view/startBird.png"));
+        
+        TranslateTransition tt = new TranslateTransition();
+        tt.setDuration(Duration.millis(1000));
+        tt.setNode(bird);
+        tt.setByY(50f);
+        tt.setCycleCount(Timeline.INDEFINITE);
+        tt.setAutoReverse(true);
+        tt.play();
+
         Button btn = new Button();
-        btn.setText("Start!");
+        btn.setId("startBtn");
         btn.setOnAction(startHandler);
+        
+        Pane startPane = new Pane();
+        startPane.setId("startPane");
+        startPane.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        startPane.getChildren().addAll(gameTitle, bird, btn);
+        btn.setPrefSize(200f, 68f);
+        btn.relocate(300,480);
 
         StackPane root = new StackPane();
-        root.getChildren().add(btn);
+        root.getChildren().add(startPane);
 
         return root;
     }
