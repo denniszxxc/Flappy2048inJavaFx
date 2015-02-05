@@ -168,23 +168,9 @@ public class GameBoard {
     public void drawBird(GraphicsContext gc) {
         double xPoisition = graphicalObjCollector.getBird().getX();
         double yPoisition = graphicalObjCollector.getBird().getY();
-        int birdVal = (int) Math.pow(2, graphicalObjCollector.getBird().getBirdPowerValue());
+        int birdPowVal = graphicalObjCollector.getBird().getBirdPowerValue();
 
-        gc.setFill(Color.BURLYWOOD);
-        gc.setStroke(Color.GRAY);
-        gc.setLineWidth(10);
-        gc.setLineJoin(StrokeLineJoin.ROUND);
-
-        gc.fillRect(xPoisition, yPoisition, Bird.BIRD_WiDTH, Bird.BIRD_HEIGHT);
-        gc.strokeRect(xPoisition, yPoisition, Bird.BIRD_WiDTH, Bird.BIRD_HEIGHT);
-
-        gc.setTextAlign(TextAlignment.CENTER);
-        gc.setTextBaseline(VPos.CENTER);
-        gc.setFill(Color.BLACK);
-        gc.setFont(new Font(30));
-
-        gc.fillText(Integer.toString(birdVal),
-                xPoisition + Bird.BIRD_WiDTH / 2, yPoisition + Bird.BIRD_HEIGHT / 2);
+        drawABox(gc, xPoisition, yPoisition, birdPowVal);
     }
 
     public void drawPillars(GraphicsContext gc) {
@@ -202,31 +188,31 @@ public class GameBoard {
             }
             double xPoisition = box.getX();
             double yPoisition = box.getY();
-            int boxVal = (int) Math.pow(2, box.getBoxValue());
+            int boxPowVal = box.getBoxValue();
 
-            gc.setFill(Color.BURLYWOOD);
-            gc.setStroke(Color.GRAY);
-            gc.setLineWidth(10);
-            gc.setLineJoin(StrokeLineJoin.ROUND);
-
-            gc.fillRect(xPoisition, yPoisition, Box.BOX_DIMENTION, Box.BOX_DIMENTION);
-            gc.strokeRect(xPoisition, yPoisition, Box.BOX_DIMENTION, Box.BOX_DIMENTION);
-
-            gc.setTextAlign(TextAlignment.CENTER);
-            gc.setTextBaseline(VPos.CENTER);
-            gc.setFill(Color.BLACK);
-            gc.setFont(new Font(30));
-
-            gc.fillText(Integer.toString(boxVal),
-                    xPoisition + Box.BOX_DIMENTION / 2, yPoisition + Box.BOX_DIMENTION / 2);
+            drawABox(gc, xPoisition, yPoisition, boxPowVal);
 
         }
     }
 
-    public void drawBackGround(GraphicsContext gc) {
-        gc.setFill(Color.SKYBLUE);
-        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    private void drawABox(GraphicsContext gc, double xPoisition, double yPoisition, int boxPowVal) {
+        gc.setFill(Box.getBoxColor(boxPowVal));
+        gc.setStroke(Color.GRAY);
+        gc.setLineWidth(10);
+        gc.setLineJoin(StrokeLineJoin.ROUND);
+        
+        gc.fillRect(xPoisition, yPoisition, Box.BOX_DIMENTION, Box.BOX_DIMENTION);
+        gc.strokeRect(xPoisition, yPoisition, Box.BOX_DIMENTION, Box.BOX_DIMENTION);
+        
+        gc.setTextAlign(TextAlignment.CENTER);
+        gc.setTextBaseline(VPos.CENTER);
+        gc.setFill(Color.BLACK);
+        gc.setFont(new Font(30));
+        
+        gc.fillText(Integer.toString((int) Math.pow(2, boxPowVal)),
+                xPoisition + Box.BOX_DIMENTION / 2, yPoisition + Box.BOX_DIMENTION / 2);
     }
+
     
     public void drawScore(GraphicsContext gc) {
         gc.setFill(Color.web("#8f7a66"));

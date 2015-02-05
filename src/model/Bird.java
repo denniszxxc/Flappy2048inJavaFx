@@ -42,7 +42,7 @@ public class Bird extends GraphicalObjs {
         super.setVelocityX(BIRD_INIT_VELOCITY_X);
         super.setVelocityY(BIRD_INIT_VELOCITY_Y);
         
-        birdPowerValue = 2;
+        birdPowerValue = 1;
         jumping = false;
         insideBoxGap = false;
     }

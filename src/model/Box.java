@@ -5,6 +5,8 @@
  */
 package model;
 
+import javafx.scene.paint.Color;
+
 /**
  *
  * @author dennisli
@@ -58,6 +60,16 @@ public class Box extends GraphicalObjs {
         this.fontSize = fontSize;
     }
 
+    public static Color getBoxColor(int boxPowerValue) {
+        switch (boxPowerValue) {
+            case 1 : return Color.BLUE;
+            case 2 : return Color.RED;
+            case 3 : return Color.YELLOW;
+            default: return Color.rgb( 222,184,135); 
+        }
+    
+    }
+    
     @Override
     public void update(long updateInterval) {
 

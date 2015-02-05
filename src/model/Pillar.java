@@ -32,7 +32,7 @@ public class Pillar extends GraphicalObjs {
         super.setVelocityY(PILLAR_INIT_VELOCITY_Y);
 
         boxes = new Box[BOX_NUMBER];
-        int[] valList = generateBoxValList(2);
+        int[] valList = generateBoxValList(1);
         for (int i = 0; i < BOX_NUMBER; i++) {
             boxes[i] = new Box(valList[i]);
             boxes[i].setX(PILLAR_INIT_X);
