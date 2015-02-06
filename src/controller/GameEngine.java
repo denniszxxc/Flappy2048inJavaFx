@@ -149,7 +149,7 @@ public class GameEngine {
     }
 
     /**
-     * Update models & pane when refresh
+     * Update models and pane when refresh
      *
      * @param newUpdateTime the system time when methods is called
      */

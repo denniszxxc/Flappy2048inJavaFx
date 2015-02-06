@@ -216,8 +216,8 @@ public class GameBoard {
     /**
      * Draw the graphical objects on screen
      *
-     * @param root
-     * @return root
+     * @param root to draw on
+     * @return root pane after drawing
      */
     public Pane drawGamePlay(Pane root) {
 

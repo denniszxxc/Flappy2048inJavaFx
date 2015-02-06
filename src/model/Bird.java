@@ -113,7 +113,7 @@ public class Bird extends GraphicalObjs {
     /**
      * Update Bird properties at every refresh.
      * 
-     * @param updateInterval 
+     * @param updateInterval time interval bewteen refrest in nanoseconds 
      */
     @Override
     public void update(long updateInterval) {

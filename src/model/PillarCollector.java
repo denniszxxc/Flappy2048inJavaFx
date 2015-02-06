@@ -60,7 +60,7 @@ public class PillarCollector extends GraphicalObjs {
     
     /**
      * Add a pillar to colllector
-     * @param newPillarBoxMinimunValue 
+     * @param newPillarBoxMinimunValue value to create new pillar with min value
      */
     public void createPillar(int newPillarBoxMinimunValue) {
         getPillars().add(new Pillar(newPillarBoxMinimunValue));
@@ -85,7 +85,7 @@ public class PillarCollector extends GraphicalObjs {
     /**
      * Update pillars inside collector, Create and delete pillar
      * 
-     * @param updateInterval 
+     * @param updateInterval time between current and last refrest in millisec.
      */
     @Override
     public void update(long updateInterval) {

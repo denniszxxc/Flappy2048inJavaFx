@@ -109,7 +109,8 @@ public class Pillar extends GraphicalObjs {
      * 
      * 
      * @param yPosition the y posistion in pixel 
-     * @return Box in the pillar on the yposistion. Return a Box(-1) when y < -1
+     * @return Box in the pillar on the yposistion. 
+     * Return a Box(-1) when y is smaller than -1
      */
     public Box getBox(double yPosition){
         if(yPosition >= 0){
@@ -122,7 +123,7 @@ public class Pillar extends GraphicalObjs {
     /**
      * Upate position of all boxes inside pillar
      * 
-     * @param updateInterval 
+     * @param updateInterval time between current and last refresh
      */
     @Override
     public void update(long updateInterval) {
