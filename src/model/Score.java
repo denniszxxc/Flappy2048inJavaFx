@@ -5,8 +5,7 @@
  */
 package model;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.LinkedList;
 
 /**
  * Store and manipulate the game's current score and last 3 high score
@@ -16,13 +15,16 @@ import java.util.Collections;
 public class Score {
 
     private int currentScore;
-    private int highestScore;
+    private LinkedList<Integer> highScores;
 
-    public Score(){
+    public Score() {
         currentScore = 0;
-        highestScore = 0;
+        highScores = new LinkedList<Integer>();
+        highScores.add(0);
+        highScores.add(0);
+        highScores.add(0);
     }
-    
+
     /**
      * @return the currentScore
      */
@@ -38,18 +40,30 @@ public class Score {
     }
 
     /**
-     * @return the highestScore
+     * @return the highScores
      */
-    public int getHighestScore() {
-        return highestScore;
+    public LinkedList<Integer> getHighScores() {
+        return highScores;
     }
-    
+
     /**
-     * Insert currentScore into a sorted highestScore Lists
+     * Insert currentScore into a sorted highScores Lists
      */
-    public void updateHighscore(){
-        if(currentScore > highestScore ){
-            highestScore =  currentScore ;
+    public void updateHighscore() {
+        
+        for(int i = 0; i < highScores.size(); i++){
+            if( currentScore > highScores.get(i)){
+               highScores.add(i, currentScore);
+               break;
+            }
         }
+        
+        if(highScores.size() >3){
+            highScores.remove(3);
+        }
+    }
+
+    public String getHighScore(int i) {
+        return "" + highScores.get(i);
     }
 }

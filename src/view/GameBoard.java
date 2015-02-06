@@ -120,7 +120,7 @@ public class GameBoard {
         Text highScoreText1 = new Text();
         highScoreText1.setTextAlignment(TextAlignment.CENTER);
         highScoreText1.setId("highScore1");
-        highScoreText1.setText("" + score.getHighestScore());
+        highScoreText1.setText("" + score.getHighScore(0));
         StackPane highScorePane1 = new StackPane();
         highScorePane1.getChildren().add(highScoreText1);
         highScorePane1.setPrefSize(200f, 100f);
@@ -129,7 +129,7 @@ public class GameBoard {
         Text highScoreText2 = new Text();
         highScoreText2.setTextAlignment(TextAlignment.CENTER);
         highScoreText2.setId("highScore2");
-        highScoreText2.setText("??");
+        highScoreText2.setText("" + score.getHighScore(1));
         StackPane highScorePane2 = new StackPane();
         highScorePane2.getChildren().add(highScoreText2);
         highScorePane2.setPrefSize(200f, 100f);
@@ -138,7 +138,7 @@ public class GameBoard {
         Text highScoreText3 = new Text();
         highScoreText3.setTextAlignment(TextAlignment.CENTER);
         highScoreText3.setId("highScore3");
-        highScoreText3.setText("?");
+        highScoreText3.setText("" + score.getHighScore(2));
         StackPane highScorePane3 = new StackPane();
         highScorePane3.getChildren().add(highScoreText3);
         highScorePane3.setPrefSize(200f, 100f);
