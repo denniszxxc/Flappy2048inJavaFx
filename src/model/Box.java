@@ -58,6 +58,7 @@ public class Box extends GraphicalObjs {
             case 13:
             case 14:
             case 15:
+            case 16:
                 return 30;
             default:
                 return 42;
