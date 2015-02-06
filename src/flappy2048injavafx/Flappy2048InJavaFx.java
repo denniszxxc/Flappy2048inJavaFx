@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package flappy2048injavafx;
 
 import controller.GameEngine;
@@ -21,8 +16,13 @@ import javafx.util.Duration;
  */
 public class Flappy2048InJavaFx extends Application {
 
+    /**
+     * The gameEngine to use.
+     */
     private GameEngine gameEngine;
-    private Scene scene;
+    /**
+     * Stage of the game.
+     */
     private Stage primaryStage;
 
     @Override
@@ -38,8 +38,8 @@ public class Flappy2048InJavaFx extends Application {
         // Create a handler for refreshing
         EventHandler<ActionEvent> eventHandler = e -> {
             gameEngine.update(System.nanoTime());
-            
-            if(gameEngine.getPane() == null){
+
+            if (gameEngine.getPane() == null) {
                 primaryStage.close();
                 return;
             }
