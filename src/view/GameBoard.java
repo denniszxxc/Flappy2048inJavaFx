@@ -16,16 +16,15 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
-import model.Bird;
 import model.GraphicalObjCollector;
 import model.Pillar;
 import model.Box;
@@ -96,7 +95,7 @@ public class GameBoard {
      * @param restartHandler restart button on action handler
      * @return root pane with graphic elements
      */
-    public Pane endScreen(EventHandler restartHandler, EventHandler endHandler) {
+    public Pane endScreen(EventHandler<ActionEvent> restartHandler, EventHandler<ActionEvent> endHandler) {
         canvas = null;
 
         ImageView endScreenImage = new ImageView(new Image("view/endScreenMessage.png"));
@@ -166,7 +165,7 @@ public class GameBoard {
         return root;
     }
 
-    public Pane initGamePlay(EventHandler jumpHandler) {
+    public Pane initGamePlay(EventHandler<InputEvent> jumpHandler) {
         canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setFocusTraversable(true);
         canvas.requestFocus();

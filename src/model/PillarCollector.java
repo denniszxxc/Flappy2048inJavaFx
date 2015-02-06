@@ -52,7 +52,8 @@ public class PillarCollector extends GraphicalObjs {
     }
     
     /**
-     * Add a pillar to collector
+     * Add a pillar to col
+     * @param newPillarBoxMinimunValuelector
      */
     public void createPillar(int newPillarBoxMinimunValue) {
         getPillars().add(new Pillar(newPillarBoxMinimunValue));
