@@ -3,7 +3,7 @@ package model;
 import javafx.scene.paint.Color;
 
 /**
- *
+ * A box on screen.
  * @author dennisli
  */
 public class Box extends GraphicalObjs {
@@ -13,20 +13,22 @@ public class Box extends GraphicalObjs {
      */
     public static final int BOX_DIMENTION = 100;
     /**
-     * the Power Value on a box. Eg val 3 mean box display 8 It equals -1 when a
-     * virtual invaled box is needed
+     * the Power Value on a box. 
+     * Eg val 3 mean box display 8. 
+     * Equals -1 when a virtual invalid box is needed 
+     *  eg. (boxes outside screen, boxes not to be draw)
      */
     private int boxPowerValue;
-    /**
-     * the font size of text inside a box
-     */
-    private int fontSize;
 
+    /**
+     * State a box to be draw 
+     */
+    private boolean draw;
     /**
      * no argument constructor
      */
     Box() {
-
+        draw = true;
     }
 
     /**
@@ -34,6 +36,7 @@ public class Box extends GraphicalObjs {
      */
     Box(int boxPowerValue) {
         this.boxPowerValue = boxPowerValue;
+        draw= true;
     }
 
     /**
@@ -50,6 +53,20 @@ public class Box extends GraphicalObjs {
         this.boxPowerValue = boxValue;
     }
 
+    /**
+     * @return the draw
+     */
+    public boolean isDraw() {
+        return draw;
+    }
+
+    /**
+     * @param draw the draw to set
+     */
+    public void setDraw(boolean draw) {
+        this.draw = draw;
+    }
+    
     /**
      * Return a integer font size appropriate to the Box's power value.
      *

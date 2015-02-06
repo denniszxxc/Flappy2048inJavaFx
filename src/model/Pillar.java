@@ -7,18 +7,34 @@ package model;
  */
 public class Pillar extends GraphicalObjs {
 
-    public static double PILLAR_WiDTH = 100;
-    public static double PILLAR_HEIGHT = 600;
+    /**
+     * Pillar's Initial X position
+     */
     private static double PILLAR_INIT_X = 800;
+    /**
+     * Pillar's Initial Y position
+     */
     private static double PILLAR_INIT_Y = 0;
+    /**
+     * Pillar's Initial velocity in X diection
+     */
     private static double PILLAR_INIT_VELOCITY_X = -0.15;
+    /**
+     * Pillar's Initial velocity in Y diection
+     */
     private static double PILLAR_INIT_VELOCITY_Y = 0;
+    /**
+     * Number of boxes in one pillar
+     */
     private final int BOX_NUMBER = 6;
 
+    /**
+     * list of boxes of the pillar
+     */
     private Box[] boxes;
 
     /**
-     * Constructing a new pillar
+     * No argument constructor
      */
     Pillar() {
         super.setX(PILLAR_INIT_X);
@@ -67,13 +83,6 @@ public class Pillar extends GraphicalObjs {
     }
 
     /**
-     * @param boxes the boxes to set
-     */
-    public void setBoxes(Box[] boxes) {
-        this.boxes = boxes;
-    }
-
-    /**
      * Generate A random order List of (2,4,8,16,32,64)
      *
      * @return random order List of (2,4,8,16,32,64)
@@ -96,10 +105,11 @@ public class Pillar extends GraphicalObjs {
     }
 
     /**
-     * retrun the box in pillar using the y position (counting from top at 0)
+     * retrun the box in pillar using the a y position (counting from top at 0)
+     * 
      * 
      * @param yPosition the y posistion in pixel 
-     * @return Box in the pillar on the yposistion
+     * @return Box in the pillar on the yposistion. Return a Box(-1) when y < -1
      */
     public Box getBox(double yPosition){
         if(yPosition >= 0){
@@ -109,6 +119,11 @@ public class Pillar extends GraphicalObjs {
         }
     }
     
+    /**
+     * Upate position of all boxes inside pillar
+     * 
+     * @param updateInterval 
+     */
     @Override
     public void update(long updateInterval) {
         super.setX(getX() + getVelocityX() * updateInterval);

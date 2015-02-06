@@ -9,9 +9,18 @@ import java.util.LinkedList;
  */
 public class Score {
 
+    /**
+     * current score
+     */
     private int currentScore;
+    /**
+     * list of 3 high score
+     */
     private LinkedList<Integer> highScores;
 
+    /**
+     * No argument contructor
+     */
     public Score() {
         currentScore = 0;
         highScores = new LinkedList<Integer>();
@@ -35,13 +44,6 @@ public class Score {
     }
 
     /**
-     * @return the highScores
-     */
-    public LinkedList<Integer> getHighScores() {
-        return highScores;
-    }
-
-    /**
      * Insert currentScore into a sorted highScores Lists
      */
     public void updateHighscore() {
@@ -58,6 +60,11 @@ public class Score {
         }
     }
 
+    /**
+     * Return the highscore of index i.
+     * @param i the index in highScore list
+     * @return a integer of score
+     */
     public String getHighScore(int i) {
         return "" + highScores.get(i);
     }

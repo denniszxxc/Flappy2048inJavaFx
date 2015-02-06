@@ -1,19 +1,26 @@
 package model;
 
 /**
- * Store position and values of graphical Objects shown on screen
+ * Collector of all moving objects shown on screen
  *
  * @author dennisli
  */
 public class GraphicalObjCollector {
 
+    /**
+     * The bird on screen.
+     */
     private Bird bird;
-    private Background background;
+    /**
+     * A collector of pillars.
+     */
     private PillarCollector pillarCollector;
 
+    /**
+     * No argument constructor initialize bird and pillar collector.
+     */
     public GraphicalObjCollector() {
         bird = new Bird();
-        background = new Background();
         pillarCollector = new PillarCollector();
     }
 
@@ -25,27 +32,6 @@ public class GraphicalObjCollector {
     }
 
     /**
-     * @param bird the bird to set
-     */
-    public void setBird(Bird bird) {
-        this.bird = bird;
-    }
-
-    /**
-     * @return the background
-     */
-    public Background getBackground() {
-        return background;
-    }
-
-    /**
-     * @param background the background to set
-     */
-    public void setBackground(Background background) {
-        this.background = background;
-    }
-
-    /**
      * @return the pillarCollector
      */
     public PillarCollector getPillarCollector() {
@@ -53,20 +39,13 @@ public class GraphicalObjCollector {
     }
 
     /**
-     * @param pillarCollector the pillarCollector to set
-     */
-    public void setPillarCollector(PillarCollector pillarCollector) {
-        this.pillarCollector = pillarCollector;
-    }
-
-    /**
-     * Update all graphically object's properties
+     * Update all graphical object's properties using the time interval between
+     * updates.
      *
-     * @param updateInterval the time interval to affect update
+     * @param updateInterval the time interval in milliseconds
      */
     public void updateAll(long updateInterval) {
         getBird().update(updateInterval);
-        // getBackground().update(updateInterval);
         getPillarCollector().update(updateInterval);
     }
 

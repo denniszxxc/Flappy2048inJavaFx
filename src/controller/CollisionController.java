@@ -131,7 +131,7 @@ class CollisionController {
         score.setCurrentScore(score.getCurrentScore() + 1);
 
         soundEffect.playHitCorrectBoxSound();
-        highBox.setBoxValue(-1);
+        highBox.setDraw(false);
     }
 
     /**

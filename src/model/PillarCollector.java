@@ -3,20 +3,32 @@ package model;
 import java.util.ArrayList;
 
 /**
- * Store, created, delete Pillars in game
+ * Collector of Pillars in game
  *
  * @author dennisli
  */
 public class PillarCollector extends GraphicalObjs {
 
     /**
-     * interval in MilliSeconds between create 2 pillars
+     * interval in MilliSeconds between create 2 pillars.
      */
     private long createPillarInterval;
+    /**
+     * Time interval of current time and last time creating new pillar.
+     */
     private long lastCreateInterval;
+    /**
+     * Value of 2's Power to create new pillar with box with minimun value.
+     */
     private int newPillarBoxMinimunValue;
+    /**
+     * A collection of pillar
+     */
     private ArrayList<Pillar> pillars;
 
+    /** 
+     * No argument constructor
+     */
     PillarCollector() {
         createPillarInterval = 5000;
         lastCreateInterval = 0;
@@ -47,8 +59,8 @@ public class PillarCollector extends GraphicalObjs {
     }
     
     /**
-     * Add a pillar to col
-     * @param newPillarBoxMinimunValuelector
+     * Add a pillar to colllector
+     * @param newPillarBoxMinimunValue 
      */
     public void createPillar(int newPillarBoxMinimunValue) {
         getPillars().add(new Pillar(newPillarBoxMinimunValue));
@@ -61,12 +73,17 @@ public class PillarCollector extends GraphicalObjs {
         getPillars().remove(0);
     }
 
+    /**
+     * 
+     * @return the leftmost pillar, which is also oldest 
+     */
     public Pillar getLeftmostPillar(){
         return getPillars().get(0);
     }
     
     
     /**
+     * Update pillars inside collector, Create and delete pillar
      * 
      * @param updateInterval 
      */

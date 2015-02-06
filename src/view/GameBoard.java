@@ -32,22 +32,48 @@ import model.Score;
  */
 public class GameBoard {
 
+    /**
+     * Width of canvas.
+     */
     public final int CANVAS_WIDTH = 800;
+    /**
+     * Height of canvas.
+     */
     public final int CANVAS_HEIGHT = 600;
 
+    /** 
+     * Canvas graphical objects draw on.
+     */
     private Canvas canvas;
+    /**
+     * Collector of Graphical objects that will be display.
+     */
     private GraphicalObjCollector graphicalObjCollector;
+    /**
+     * Score to read.
+     */
     private Score score;
 
+    /**
+     * No argument constructor.
+     */
     public GameBoard() {
         graphicalObjCollector = new GraphicalObjCollector();
     }
 
+    /**
+     * constructor initializing a score object.
+     * @param score to initialize
+     */
     public GameBoard(Score score) {
         graphicalObjCollector = new GraphicalObjCollector();
         this.score = score;
     }
 
+    /**
+     * 
+     * @return the graphicalObjectCollector.
+     */
     public GraphicalObjCollector getGraphicalObjCollector() {
         return graphicalObjCollector;
     }
@@ -55,7 +81,8 @@ public class GameBoard {
     /**
      * Display the start screen
      *
-     * @parm startHandler Handler for Start Button
+     * @param startHandler for Start Button
+     * @return the pane storing drawn graphical game objects
      */
     public Pane startScreen(EventHandler<ActionEvent> startHandler) {
         ImageView gameTitle = new ImageView(new Image("view/startScreenMessage.png"));
@@ -85,9 +112,10 @@ public class GameBoard {
     }
 
     /**
-     * Display the end screen
+     * Return the end screen.
      *
-     * @param restartHandler restart button on action handler
+     * @param restartHandler handle restart button on action 
+     * @param endHandler handle quit button on action
      * @return root pane with graphic elements
      */
     public Pane endScreen(EventHandler<ActionEvent> restartHandler, EventHandler<ActionEvent> endHandler) {
@@ -160,6 +188,12 @@ public class GameBoard {
         return root;
     }
 
+    /**
+     * Intialize obejct for displaying gameplay.
+     * 
+     * @param jumpHandler handle jump event
+     * @return pane storing the drawn graphical objects.
+     */
     public Pane initGamePlay(EventHandler<InputEvent> jumpHandler) {
         canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setFocusTraversable(true);
@@ -197,6 +231,10 @@ public class GameBoard {
         return root;
     }
 
+    /**
+     * Draw a bird on graphics Context
+     * @param gc to draw on
+     */
     public void drawBird(GraphicsContext gc) {
         double xPoisition = graphicalObjCollector.getBird().getX();
         double yPoisition = graphicalObjCollector.getBird().getY();
@@ -205,6 +243,10 @@ public class GameBoard {
         drawABox(gc, xPoisition, yPoisition, birdPowVal);
     }
 
+    /**
+     * Draw all pillars on graphics Context
+     * @param gc to draw on
+     */
     public void drawPillars(GraphicsContext gc) {
         ArrayList<Pillar> pillars = graphicalObjCollector.getPillarCollector().getPillars();
         for (Pillar pillar : pillars) {
@@ -212,10 +254,15 @@ public class GameBoard {
         }
     }
 
+    /**
+     * Draw all boxes of one pillar on graphics Context
+     * @param gc to draw on
+     * @param pillar to be drawn
+     */
     public void drawBoxes(GraphicsContext gc, Pillar pillar) {
         Box[] boxes = pillar.getBoxes();
         for (Box box : boxes) {
-            if (box.getBoxValue() == -1) {
+            if (box.isDraw() == false) {
                 continue;
             }
             double xPoisition = box.getX();
@@ -227,6 +274,14 @@ public class GameBoard {
         }
     }
 
+    /**
+     * Draw one box on graphics context.
+     * 
+     * @param gc to draw on 
+     * @param xPoisition of the box 
+     * @param yPoisition of the box 
+     * @param boxPowVal of the box
+     */
     private void drawABox(GraphicsContext gc, double xPoisition, double yPoisition, int boxPowVal) {
         gc.setFill(Box.boxColor(boxPowVal));
         gc.setStroke(Color.GRAY);
@@ -251,6 +306,10 @@ public class GameBoard {
                 xPoisition + Box.BOX_DIMENTION / 2, yPoisition + Box.BOX_DIMENTION / 2);
     }
 
+    /**
+     * Draw the scroe box on the graphics context
+     * @param gc to draw on
+     */
     public void drawScore(GraphicsContext gc) {
         gc.setFill(Color.web("#8f7a66"));
         gc.fillRoundRect(700, 20, 80, 50, 10, 10);

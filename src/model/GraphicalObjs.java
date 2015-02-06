@@ -1,16 +1,27 @@
 package model;
 
 /**
- * Abstracts of graphical objects will be displayed to user, having x,y property
- * and velocity. Properties will be change by update method.
+ * Abstracts of a graphical object that will be displayed to user, 
  *
  * @author dennisli
  */
 public abstract class GraphicalObjs {
 
+    /**
+     * x position 
+     */
     private double x;
+    /**
+     * y position 
+     */
     private double y;
+    /**
+     * Velocity in X direction
+     */
     private double velocityX;
+    /**
+     * Velocity in Y direction
+     */
     private double velocityY;
 
     /**
