@@ -12,7 +12,7 @@ public class PillarCollector extends GraphicalObjs {
     /**
      * interval in MilliSeconds between create 2 pillars.
      */
-    private long createPillarInterval;
+    private final long createPillarInterval;
     /**
      * Time interval of current time and last time creating new pillar.
      */
