@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<base href="html_include/">
+<link href="style.css" rel="stylesheet" type="text/css">
+<title>Flappy 2048</title>
+</head>
+<body>
+<h1>Flappy 2048</h1>
+<h2>About Us</h2>
+<h3>Group members</h3>
+<div>
+LI Ho Yeung (Leader) — <a href="mailto:hyliae@connect.ust.hk">hyliae@connect.ust.hk</a>
+<br>
+TSE Kin Fung Antony — <a href="mailto:kfatse@connect.ust.hk">kfatse@connect.ust.hk</a>
+</div>
+<h2>Game</h2>
+<div> 
+
+<APPLET WIDTH="800" HEIGHT="600" code="flappy2048injavafx.Flappy2048InJavaFx" archive="Flappy2048InJavaFx.jar">
+</APPLET>
+
+</div>
+<h3>About</h3>
+<div>The idea of the game comes from web games with the same name "Flappy 2048", which is a mix of famous games "Flappy Bird" and "2048" in 2014.</div>
+<h3>Description</h3>
+<div>Player has to control a "bird" which is a box containing a number. The "bird" is moving towards some pillars which is formed by a number of boxes. If the "bird" hits on the boxes which having a different number with the "bird" or the hidden part of pillar above the 6 boxes, the game is over. Only the boxes having the same number as the "bird" can permit player passing through the pillar. Each time the "bird" passes through the pillar successfully, the score will increase by 1.</div>
+<div>The "bird" will fall down if player does not do anything. To keep the "bird" flying, users have to keep pressing the jump button to maintain the flying height of the "bird.</div>
+<h3>Control</h3>
+<div>"Jump" is the only control in the game. Player can make the "bird" jumps by pressing any buttons on keyboard or mouse.</div>
+<h3>Compile & Run</h3>
+<div>To compile the source code of Flappy 2048, please run this command under 'src' folder with JDK version 8 or above:</div>
+<div>
+<pre>javac model/*.java view/*.java controller/*.java flappy2048injavafx/*.java</pre>
+</div>
+<div>After compiling the source code, the game can be start by running this command under 'src' folder:</div>
+<div><pre>java flappy2048injavafx.Flappy2048InJavaFx</pre></div>
+<h3>Preview</h3>
+<div><img src="01.png"><br>Player can press on the start button or space bar to start the game.</div>
+<div><img src="02.png"><br>The "bird" controlled by the player is the box with "2" on the left hand side. A pillar is formed by 6 boxes. The "bird" has to pass the pillar through the box with the same number (i.e. "2") in the pillar.</div>
+<div><img src="03.png"><br>If the "bird" successfully passed the pillar, the number inside the "bird" will be doubled. After that, the player can keep continue to pass other pillars through the box with the same number.</div>
+<div><img src="04.png"><br>If the "bird" hit the boxes without the same number as the "bird", the game is over.</div>
+<div><img src="05.png"><br>The game over screen will show your final score and the top 3 scores you have got. You can choose "Restart" to play the game again or "Quit" to exit the game.</div>
+<div><img src="06.png"><br>Let's enjoy the game and  get a high score!</div>
+<div></div>
+</body>
+</html>
